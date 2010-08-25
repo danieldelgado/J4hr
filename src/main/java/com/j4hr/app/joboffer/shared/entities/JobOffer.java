@@ -1,16 +1,21 @@
 package com.j4hr.app.joboffer.shared.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.PrimaryKeyJoinColumns;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="JOB_OFFER")
 public class JobOffer {
-	@GeneratedValue @Id
+	@GeneratedValue(strategy=GenerationType.AUTO) @Id
 	private int id;
 	@Column(name="POSITION_TITLE")
 	private String positionTile;
@@ -21,28 +26,34 @@ public class JobOffer {
 	private int nbPosition;
 	@Column(name="JOB_REF")
 	private String jobRef;
-//	@JoinColumn(name="ID_TYPE_OF_CONTRACT")
-//	private TypeOfContract typeOfContract;
-//	@JoinColumn(name="ID_ACTIVITY_SECTOR")
-//	private ActivitySector activitySector;
-//	@JoinColumn(name="ID")
-//	private User creator;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private TypeOfContract typeOfContract;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private ActivitySector activitySector;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private User creator;
 	
 	
 	
 	
-//	public User getCreator() {
-//		return creator;
-//	}
-//	public void setCreator(User creator) {
-//		this.creator = creator;
-//	}
-//	public TypeOfContract getTypeOfContract() {
-//		return typeOfContract;
-//	}
-//	public void setTypeOfContract(TypeOfContract typeOfContract) {
-//		this.typeOfContract = typeOfContract;
-//	}
+	public User getCreator() {
+		return creator;
+	}
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+	public TypeOfContract getTypeOfContract() {
+		return typeOfContract;
+	}
+	public void setTypeOfContract(TypeOfContract typeOfContract) {
+		this.typeOfContract = typeOfContract;
+	}
 	public int getId() {
 		return id;
 	}
@@ -79,13 +90,14 @@ public class JobOffer {
 	public void setJobRef(String jobRef) {
 		this.jobRef = jobRef;
 	}
-
-//	public ActivitySector getActivitySector() {
-//		return activitySector;
-//	}
-//	public void setActivitySector(ActivitySector activitySector) {
-//		this.activitySector = activitySector;
-//	}
+	
+	
+	public ActivitySector getActivitySector() {
+		return activitySector;
+	}
+	public void setActivitySector(ActivitySector activitySector) {
+		this.activitySector = activitySector;
+	}
 	
 	
 	

@@ -1,10 +1,12 @@
 package com.j4hr.app.joboffer.server.service;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.j4hr.app.joboffer.server.dao.security.AuthentificationDAO;
+import com.j4hr.app.joboffer.server.dao.user.UserDAO;
 import com.j4hr.app.joboffer.shared.entities.User;
 import com.j4hr.app.joboffer.shared.service.AuthService;
 
@@ -15,20 +17,18 @@ public class AuthServiceImpl implements AuthService{
 
 
 	@Autowired
-	private AuthentificationDAO userDAO;
+	private UserDAO userDAO;
 	
 	
 
 	@Override
 	public boolean checkUserAuth(String login, String pass) {
-		System.out.println("login " + login + " mdp " + pass);
 		
 		User u=null;
 		try {
 			u = userDAO.findUserByLogin(login, pass);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+		} catch (NoResultException e) {
+			//if exception is thrown, it's that no user exist for login/mdp 
 		}
 		return (u!=null);
 	}

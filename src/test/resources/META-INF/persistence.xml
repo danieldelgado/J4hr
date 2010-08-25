@@ -11,11 +11,11 @@
 		<class>com.j4hr.app.joboffer.shared.entities.TypeOfContract</class>
 		<class>com.j4hr.app.joboffer.shared.entities.ActivitySector</class>
   <properties>
-   <property name="hibernate.hbm2ddl.auto" value="update" />
+   <property name="hibernate.hbm2ddl.auto" value="create-drop" />
    <property name="hibernate.show_sql" value="true" />
    <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
    <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver" />
-   <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/j4hrDB1;create=true" />
+   <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/j4hrDB;create=true" />
    <property name="hibernate.connection.username" value="APP" />
    <property name="hibernate.connection.password" value="APP" />
 
