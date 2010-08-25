@@ -19,7 +19,8 @@
  <tx:annotation-driven />
  
   <bean id="userDAO" class="com.j4hr.app.joboffer.server.dao.user.UserDAOImpl"/>
- <bean id="jobOfferDAO" class="com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAOImpl"/>	
+  <bean id="userDAO" class="com.j4hr.app.joboffer.server.dao.user.JobOfferDAOImpl"/>
+ 	
  	<!-- Configuration JPA & moteur transaction -->
 	 <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean"> 
 	  	<property name="persistenceUnitName" value="j4hrtestPU"/>
