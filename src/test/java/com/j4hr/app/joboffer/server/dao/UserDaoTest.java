@@ -23,9 +23,7 @@ public class UserDaoTest {
 	
 	@Autowired
 	private UserDAO userDAO;
-	@Autowired
-	private JobOfferDAO jobOfferDAO;
-	
+
 	
 	
 	@Test
@@ -40,29 +38,21 @@ public class UserDaoTest {
 		u.setPassword("280276");
 		u.setMail("gsznajderman@.com");
 		
-		JobOffer jo = new JobOffer();
 		
-		jo.setJobDescription("Java developpeur");
-		jo.setJobRef("JAVADEV");
-		jo.setCreator(u);
-		jo.setNbPosition(1);
 		
 		
 		Assert.assertEquals(0, u.getId());
 		
 		userDAO.persist(u);
-		jobOfferDAO.persist(jo);
+	
 		
 		Assert.assertNotNull(u.getId());
 		System.out.println("id " + u.getLastname());
-		Assert.assertNotNull(jo.getId());
+		
 		
 		User userLoaded = userDAO.findById(u.getId());
-		System.out.println("user loaded " + jo.getJobDescription());
-		int idjob = jo.getId();
-		System.out.println("idjob " + idjob);
-		JobOffer jloader = jobOfferDAO.findById(idjob);
-		Assert.assertNotNull(jloader.getId());
+		
+		
 		System.out.println("Perfect");
 		
 		

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.j4hr.app.joboffer.client.views.AbstractView;
 import com.j4hr.app.joboffer.client.views.HomeView;
@@ -21,11 +22,8 @@ public class Application
 	
 	
 	private Map<String, AbstractView> views = new HashMap<String, AbstractView>();
-//	/**
-//	 * Create a remote service proxy to talk to the server-side Greeting service.
-//	 */
 	
-
+	
 	/**
 	 * This is the entry point method.
 	 */
@@ -38,8 +36,8 @@ public class Application
 	
 	public void display(String viewName)
     {
-         AbstractView view = views.get(viewName);
-         RootPanel.get("container_app").clear();
-         RootPanel.get("container_app").add(view.getContent());
+	     AbstractView view = views.get(viewName);
+         RootLayoutPanel.get().clear();
+         RootLayoutPanel.get().add(view.getContent());
     }
 }

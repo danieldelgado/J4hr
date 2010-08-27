@@ -1,14 +1,12 @@
 package com.j4hr.app.joboffer.client.views;
 
-
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.j4hr.app.joboffer.client.Application;
+import com.j4hr.app.joboffer.client.ext.BasicArrayGrid;
 
 public class HomeView extends AbstractView {
 
@@ -19,24 +17,30 @@ public class HomeView extends AbstractView {
 
 	@Override
 	public Widget getContent() {
-		 Label l = new Label("Home view");
-
-	        Button b = new Button("Go to login");
-	        b.addClickHandler(new ClickHandler(){
-	        	public void onClick(ClickEvent ce)
-	        	{
-	        			gui.display("login");
-	        		}
-	        	});
 
 
-	        Panel p = new HorizontalPanel();
-	        p.add(l);
-	        p.add(b);
+		DockLayoutPanel d = new DockLayoutPanel(Unit.PCT);
+		HorizontalPanel menu = new HorizontalPanel();
+		menu.setWidth("100%");
+		menu.setStyleName("addBorder");
+		menu.add(createHtmlElement("menu1", null));
+		
+
+		d.addNorth(menu, 20);
+		d.addSouth(new BasicArrayGrid(), 80);
 
 
 
-	        return p;
+		return d;
 	}
 
+	private HTML createHtmlElement(String lib, String cssClass){
+		HTML elem = new HTML();
+		elem.setText(lib);
+		if(cssClass != null){
+		elem.setStyleName(cssClass);
+		}
+		return elem;
+	}
+	
 }
