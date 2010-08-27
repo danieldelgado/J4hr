@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAO;
+import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAOImpl;
 import com.j4hr.app.joboffer.server.dao.user.UserDAO;
 import com.j4hr.app.joboffer.shared.entities.JobOffer;
 import com.j4hr.app.joboffer.shared.entities.User;

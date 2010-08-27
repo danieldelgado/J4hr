@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAO;
+import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAOImpl;
 import com.j4hr.app.joboffer.shared.entities.JobOffer;
 import com.j4hr.app.joboffer.shared.entities.TypeOfContract;
 import com.j4hr.app.joboffer.shared.entities.User;
@@ -19,7 +19,7 @@ import com.j4hr.app.joboffer.shared.entities.User;
 public class JobOfferDAOTest {
 	
 	@Autowired
-	private JobOfferDAO jobOfferDAO;
+	private JobOfferDAOImpl jobOfferDAO;
 	
 
 	@Test
