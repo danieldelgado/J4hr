@@ -29,6 +29,10 @@ public class JobOffer {
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn
+	private JobOfferStatus jobofferStatus;
+		
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private TypeOfContract typeOfContract;
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -38,6 +42,7 @@ public class JobOffer {
 	@OneToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private User creator;
+	
 	
 	
 	
@@ -90,13 +95,17 @@ public class JobOffer {
 	public void setJobRef(String jobRef) {
 		this.jobRef = jobRef;
 	}
-	
-	
 	public ActivitySector getActivitySector() {
 		return activitySector;
 	}
 	public void setActivitySector(ActivitySector activitySector) {
 		this.activitySector = activitySector;
+	}
+	public JobOfferStatus getJobofferStatus() {
+		return jobofferStatus;
+	}
+	public void setJobofferStatus(JobOfferStatus jobofferStatus) {
+		this.jobofferStatus = jobofferStatus;
 	}
 	
 	

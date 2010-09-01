@@ -25,11 +25,15 @@ public class AuthServiceImpl implements AuthService{
 	public boolean checkUserAuth(String login, String pass) {
 		
 		User u=null;
+		System.out.println("test"+login+pass);
 		try {
 			u = userDAO.findUserByLogin(login, pass);
-		} catch (NoResultException e) {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 			//if exception is thrown, it's that no user exist for login/mdp 
 		}
+		System.out.println("test2");
 		return (u!=null);
 	}
 	

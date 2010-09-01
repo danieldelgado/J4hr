@@ -60,9 +60,13 @@ public class UserDaoTest {
 	}
 	
 	@Test
-	public void test()
+	@Rollback(false)
+	public void checkAuthenText()
 	{
 		
+		User ufound = userDAO.findUserByLogin("fabszn", "280276");
+		Assert.assertEquals("Sznajderman", ufound.getLastname()) ;
+		Assert.assertNotNull(ufound);
 	}
 
 }
