@@ -1,17 +1,18 @@
 package com.j4hr.app.joboffer.client.views;
 
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.LabelField;
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
+import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
+import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import com.google.gwt.user.client.ui.Widget;
 import com.j4hr.app.joboffer.client.Application;
 
@@ -28,71 +29,46 @@ public class LoginView extends AbstractView {
 	@Override
 	public Widget getContent() {
 
-		Label Title = new Label("Authentification");
-        Panel loginPanel = new HorizontalPanel();
-        Label loginLabel = new Label("Login : ");
-        TextBox loginText = new TextBox();
-        
-        loginPanel.add(loginLabel);
-        loginPanel.add(loginText);
-        
-        Panel passwordPanel = new HorizontalPanel();
-        PasswordTextBox passwordText = new PasswordTextBox();
-        Label passwordLabel = new Label("Password : ");
-        passwordPanel.add(passwordLabel);
-        passwordPanel.add(passwordText);
-        
-        
-        
-        Button loginAction = new Button("Log in");
-        
-        VerticalPanel form = new VerticalPanel();
-        VerticalPanel fields  = new VerticalPanel();
-        fields.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
-        form.setHorizontalAlignment(HorizontalPanel.ALIGN_CENTER);
-        fields.add(loginPanel);
-        fields.add(passwordPanel);
-        form.add(Title);
-        form.add(fields);
-        form.add(loginAction);
-        
-        DockLayoutPanel d = new DockLayoutPanel(Unit.PCT);
-        HTML titreAppli = new HTML("JobOffer");
-        titreAppli.addStyleName("titreAppli");
-        
-        d.addEast(createHtmlElement("1", null), 40);
-        d.addNorth(createHtmlElement("jobOffer", "titreAppli"), 30);
-        d.addWest(createHtmlElement("2", null), 35);
-        d.addSouth(createHtmlElement("3", null), 40);
-        d.add(form);
+		ContentPanel panel = new ContentPanel();
+		panel.setHeaderVisible(true);
+		panel.setHeading("Authentification");
+		VBoxLayout authenLayout = new VBoxLayout();
+		authenLayout.setVBoxLayoutAlign(VBoxLayoutAlign.CENTER);
+		authenLayout.setPack(BoxLayoutPack.CENTER);
+		panel.setLayout(authenLayout);  
 
-        
-        loginAction.addClickHandler(new ClickHandler()
-                                  {
-                                      public void onClick(ClickEvent event) {
-                                          System.out.println("clicktoto");  
-                                    	  gui.display("home");
-                                      }
-                                  });
+		VBoxLayoutData layoutData = new VBoxLayoutData(new Margins(0, 0, 5, 0));
+		LabelField lblLogin = new LabelField("Login : ");
+		final TextField<String> login = new TextField<String>();
+		LabelField lblPassword = new LabelField("Password : ");
+		final TextField<String> password = new TextField<String>();
+		Button authenAction = new Button("Log in");
+		authenAction.addListener(Events.OnClick, new Listener<ButtonEvent>() {  
 
-
-        
-        
-        
-       
+			public void handleEvent(ButtonEvent ce) {
+				MessageBox mb = new MessageBox();
+				
+				
+				
+				mb.setMessage("Autentification login - password : " +login.getValue() +"  "+ password.getValue());
+				mb.show();
+				
+				gui.display("home");
+			}});
+		
+		panel.add(lblLogin,layoutData);
+		panel.add(login,layoutData);
+		panel.add(lblPassword,layoutData);
+		panel.add(password,layoutData);
+		panel.add(authenAction,layoutData);
+		panel.setSize(300, 200);
 
 
 
-        return d;
+
+		return panel;
 	}
 	
-	private HTML createHtmlElement(String lib, String cssClass){
-		HTML elem = new HTML();
-		elem.setText(lib);
-		if(cssClass != null){
-		elem.setStyleName(cssClass);
-		}
-		return elem;
-	}
+	
 
 }

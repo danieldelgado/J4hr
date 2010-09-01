@@ -12,3 +12,11 @@ button {
 img {
   margin-top: 20px;
 }
+
+.rootPanelLayout {
+position: absolute;
+z-index: -32767;
+left: 100px;
+top: 100px;
+
+}

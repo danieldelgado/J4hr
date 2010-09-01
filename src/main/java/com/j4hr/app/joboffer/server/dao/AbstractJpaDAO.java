@@ -40,6 +40,8 @@ public abstract class AbstractJpaDAO<K,E> implements IDao<K,E>{
 		
 	}
 	
-	
+	public E merge(E entity){
+		return entityManager.merge(entity);
+	}
 
 }

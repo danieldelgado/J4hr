@@ -38,7 +38,7 @@ public class BasicArrayGrid extends LayoutContainer {
   protected void onRender(Element parent, int index) {  
     super.onRender(parent, index);  
     setLayout(new FlowLayout(10));  
-  
+    
     final NumberFormat currency = NumberFormat.getCurrencyFormat();  
     final NumberFormat number = NumberFormat.getFormat("0.00");  
     final NumberCellRenderer<Grid<Stock>> numberRenderer = new NumberCellRenderer<Grid<Stock>>(  
@@ -64,39 +64,36 @@ public class BasicArrayGrid extends LayoutContainer {
     List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
   
     ColumnConfig column = new ColumnConfig();  
-    column.setId("name");  
-    column.setHeader("Company");  
-    column.setWidth(200);  
-    configs.add(column);  
-  
-    column = new ColumnConfig();  
-    column.setId("symbol");  
-    column.setHeader("Symbol");  
+    column.setId("description");  
+    column.setHeader("Description");  
     column.setWidth(100);  
     configs.add(column);  
   
     column = new ColumnConfig();  
-    column.setId("last");  
-    column.setHeader("Last");  
+    column.setId("title");  
+    column.setHeader("title");  
+    column.setWidth(100);  
+    configs.add(column);  
+    
+    column = new ColumnConfig();  
+    column.setId("datePublication");  
+    column.setHeader("Publishing date");  
     column.setAlignment(HorizontalAlignment.RIGHT);  
     column.setWidth(75);  
     column.setRenderer(gridNumber);  
     configs.add(column);  
   
-    column = new ColumnConfig("change", "Change", 100);  
-    column.setAlignment(HorizontalAlignment.RIGHT);  
-    column.setRenderer(change);  
-    configs.add(column);  
+//    TODO A conserver!!
+//    column = new ColumnConfig();  
+//    column.setAlignment(HorizontalAlignment.RIGHT);  
+//    column.setRenderer(change);  
+//    configs.add(column);  
   
     column = new ColumnConfig("date", "Last Updated", 100);  
     column.setAlignment(HorizontalAlignment.RIGHT);  
     column.setDateTimeFormat(DateTimeFormat.getShortDateFormat());  
     configs.add(column);  
-    column = new ColumnConfig("bidouille", "Last Updated", 100);  
-    column.setAlignment(HorizontalAlignment.RIGHT);  
-    column.setDateTimeFormat(DateTimeFormat.getShortDateFormat());  
-    configs.add(column);  
-  
+      
     ListStore<Stock> store = new ListStore<Stock>();  
     store.add(getStocks());  
     store.add(getStocks()); 
@@ -107,20 +104,19 @@ public class BasicArrayGrid extends LayoutContainer {
     
     cp.setBodyBorder(false);  
     //cp.setIcon(Resources.ICONS.table());  
-    cp.setHeading("Basic Grid");  
+    cp.setHeading("Draft Job Offer's list");  
     cp.setButtonAlign(HorizontalAlignment.CENTER);  
     cp.setLayout(new FitLayout());  
-    cp.setSize(1024, 400);  
+    cp.setSize(780, 500);  
   
     Grid<Stock> grid = new Grid<Stock>(store, cm);  
     grid.setStyleAttribute("borderTop", "none");  
-    grid.setAutoExpandColumn("name");  
+    grid.setAutoExpandColumn("description");  
     grid.setBorders(true);  
     grid.setStripeRows(true);  
     cp.add(grid);  
   
     add(cp);  
-   
     
   }  
   

@@ -8,7 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAOImpl;
+import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAO;
+import com.j4hr.app.joboffer.server.dao.joboffer.TypeOfContractDAO;
 import com.j4hr.app.joboffer.shared.entities.JobOffer;
 import com.j4hr.app.joboffer.shared.entities.TypeOfContract;
 import com.j4hr.app.joboffer.shared.entities.User;
@@ -19,7 +20,9 @@ import com.j4hr.app.joboffer.shared.entities.User;
 public class JobOfferDAOTest {
 	
 	@Autowired
-	private JobOfferDAOImpl jobOfferDAO;
+	private JobOfferDAO jobOfferDAO;
+	@Autowired
+	private TypeOfContractDAO typeOfContractDAO;
 	
 
 	@Test
@@ -35,7 +38,10 @@ public class JobOfferDAOTest {
 		creator.setMail("gsznajderman@.com");
 
 		TypeOfContract toc = new TypeOfContract();
-		toc.setTypeOfContractLib("CDI");
+//		toc.setTypeOfContractLib("CDI");
+		toc.setIdTypeOfContract(1);
+//		TypeOfContract toc = typeOfContractDAO.findById(1);
+		toc = typeOfContractDAO.merge(toc);
 		
 		jo.setJobDescription("Java developpeur");
 		jo.setJobRef("JAVADEV");
@@ -55,6 +61,16 @@ public class JobOfferDAOTest {
 		JobOffer jloader = jobOfferDAO.findById(idjob);
 		Assert.assertNotNull(jloader);
 		Assert.assertNotNull(jloader.getId());
+		System.out.println("type of contract lib " + jloader.getTypeOfContract().getTypeOfContractLib());
+		//Assert.assertNotNull(jloader.getTypeOfContract().getTypeOfContractLib());
+		try{
+		TypeOfContract found = typeOfContractDAO.findById(2);
+		//Assert.fail("aucun typeofcontract trouvé");
+		}catch(Exception e){
+			
+		}
+		
+		
 		
 	}
 }

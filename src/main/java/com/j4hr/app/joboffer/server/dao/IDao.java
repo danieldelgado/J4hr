@@ -9,4 +9,5 @@ public interface IDao<K,E> {
 	//TODO implémenter la methode générique de récupération de toutes les entités
 	//public Collection<E> findAll()
 	public void remove(E entity);
+	public E merge(E entity);
 }
