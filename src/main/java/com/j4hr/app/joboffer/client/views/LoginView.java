@@ -44,6 +44,7 @@ public class LoginView extends AbstractView {
 		final TextField<String> login = new TextField<String>();
 		LabelField lblPassword = new LabelField("Password : ");
 		final TextField<String> password = new TextField<String>();
+		password.setPassword(true);
 		Button authenAction = new Button("Log in");
 		authenAction.addListener(Events.OnClick, new Listener<ButtonEvent>() {  
 

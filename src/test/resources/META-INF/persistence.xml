@@ -11,8 +11,9 @@
 		<class>com.j4hr.app.joboffer.shared.entities.TypeOfContract</class>
 		<class>com.j4hr.app.joboffer.shared.entities.ActivitySector</class>
 		<class>com.j4hr.app.joboffer.shared.entities.JobOfferStatus</class>
+		<class>com.j4hr.app.joboffer.shared.entities.JobType</class>
   <properties>
-   <property name="hibernate.hbm2ddl.auto" value="update" /><!--create-drop-->
+   <property name="hibernate.hbm2ddl.auto" value="create-drop" /><!--update-->
    <property name="hibernate.show_sql" value="true" />
    <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
    <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver" />

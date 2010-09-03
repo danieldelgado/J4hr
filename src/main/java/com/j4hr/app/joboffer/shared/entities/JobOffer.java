@@ -6,10 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.PrimaryKeyJoinColumns;
 import javax.persistence.Table;
 
 @Entity
@@ -24,34 +22,38 @@ public class JobOffer {
 	private String tags;
 	@Column(name="NB_POSITION")
 	private int nbPosition;
-	@Column(name="JOB_REF")
+	@Column(name="JOB_REF",nullable=false)
 	private String jobRef;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL,optional=false)
 	@PrimaryKeyJoinColumn
-	private JobOfferStatus jobofferStatus;
+	private Status jobofferStatus;
 		
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL,optional=false)
 	@PrimaryKeyJoinColumn
 	private TypeOfContract typeOfContract;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL,optional=false)
 	@PrimaryKeyJoinColumn
 	private ActivitySector activitySector;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL,optional=false)
 	@PrimaryKeyJoinColumn
-	private User creator;
+	private JobType jobType;
+	
+	@OneToOne(cascade=CascadeType.ALL,optional=false)
+	@PrimaryKeyJoinColumn
+	private User user;
 	
 	
 	
 	
 	
-	public User getCreator() {
-		return creator;
+	public User getUser() {
+		return user;
 	}
-	public void setCreator(User creator) {
-		this.creator = creator;
+	public void setUser(User creator) {
+		this.user = creator;
 	}
 	public TypeOfContract getTypeOfContract() {
 		return typeOfContract;
@@ -101,11 +103,17 @@ public class JobOffer {
 	public void setActivitySector(ActivitySector activitySector) {
 		this.activitySector = activitySector;
 	}
-	public JobOfferStatus getJobofferStatus() {
+	public Status getJobofferStatus() {
 		return jobofferStatus;
 	}
-	public void setJobofferStatus(JobOfferStatus jobofferStatus) {
+	public void setJobofferStatus(Status jobofferStatus) {
 		this.jobofferStatus = jobofferStatus;
+	}
+	public JobType getJobType() {
+		return jobType;
+	}
+	public void setJobType(JobType jobType) {
+		this.jobType = jobType;
 	}
 	
 	
