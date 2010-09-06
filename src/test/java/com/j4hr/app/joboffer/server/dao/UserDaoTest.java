@@ -1,6 +1,7 @@
 package com.j4hr.app.joboffer.server.dao;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,12 +62,24 @@ public class UserDaoTest {
 	
 	@Test
 	@Rollback(false)
-	public void checkAuthenText()
-	{
-		
-		User ufound = userDAO.findUserByLogin("fabszn", "280276");
-		Assert.assertEquals("Sznajderman", ufound.getLastname()) ;
-		Assert.assertNotNull(ufound);
+	public void checkAuthenText() {
+
+		User u = new User();
+		u.setFirstname("Fabrice");
+		u.setLastname("Sznajderman");
+		u.setLogin("fabszn");
+		u.setPassword("220276");
+		u.setMail("fabszn@gmail.com");
+
+		userDAO.persist(u);
+		try {
+			User ufound = userDAO.findUserByLogin("fabszn", "220276");
+
+			Assert.assertEquals("Sznajderman", ufound.getLastname());
+			Assert.assertNotNull(ufound);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

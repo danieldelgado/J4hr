@@ -11,23 +11,24 @@ import javax.persistence.Table;
 public class TypeOfContract {
 	
 	@GeneratedValue @Id 
-	@Column(name="ID_TYPE_OF_CONTRACT")
-	private int idTypeOfContract;
-	@Column(name="TYPE_OF_CONTRACT_LIB")
-	private String typeOfContractLib;
+	private Integer id;
+	@Column(name="LBL_TYPE_OF_CONTRACT")
+	private String lblTypeOfContract;
 	
-	public int getIdTypeOfContract() {
-		return idTypeOfContract;
+	public Integer getId() {
+		return id;
 	}
-	public void setIdTypeOfContract(int idTypeofContract) {
-		this.idTypeOfContract = idTypeofContract;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public String getTypeOfContractLib() {
-		return typeOfContractLib;
+	public String getLblTypeOfContract() {
+		return lblTypeOfContract;
 	}
-	public void setTypeOfContractLib(String typeOfContractLib) {
-		this.typeOfContractLib = typeOfContractLib;
+	public void setLblTypeOfContract(String lblTypeOfContract) {
+		this.lblTypeOfContract = lblTypeOfContract;
 	}
+	
+	
 	
 	
 

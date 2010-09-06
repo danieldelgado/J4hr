@@ -10,7 +10,8 @@
 		<class>com.j4hr.app.joboffer.shared.entities.User</class>
 		<class>com.j4hr.app.joboffer.shared.entities.TypeOfContract</class>
 		<class>com.j4hr.app.joboffer.shared.entities.ActivitySector</class>
-		<class>com.j4hr.app.joboffer.shared.entities.JobOfferStatus</class>
+		<class>com.j4hr.app.joboffer.shared.entities.Status</class>
+		<class>com.j4hr.app.joboffer.shared.entities.JobType</class>
 
   <properties>
    <property name="hibernate.hbm2ddl.auto" value="update" />

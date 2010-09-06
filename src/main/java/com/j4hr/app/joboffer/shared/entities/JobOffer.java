@@ -1,13 +1,12 @@
 package com.j4hr.app.joboffer.shared.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -25,28 +24,25 @@ public class JobOffer {
 	@Column(name="JOB_REF",nullable=false)
 	private String jobRef;
 	
-	@OneToOne(cascade=CascadeType.ALL,optional=false)
-	@PrimaryKeyJoinColumn
+	@OneToOne
+	@JoinColumn(nullable=false)
 	private Status jobofferStatus;
-		
-	@OneToOne(cascade=CascadeType.ALL,optional=false)
-	@PrimaryKeyJoinColumn
+
+	@OneToOne
+	@JoinColumn(nullable=false)
 	private TypeOfContract typeOfContract;
 	
-	@OneToOne(cascade=CascadeType.ALL,optional=false)
-	@PrimaryKeyJoinColumn
+	@OneToOne
+	@JoinColumn(nullable=false)
 	private ActivitySector activitySector;
 	
-	@OneToOne(cascade=CascadeType.ALL,optional=false)
-	@PrimaryKeyJoinColumn
+	@OneToOne
+	@JoinColumn(nullable=false)
 	private JobType jobType;
 	
-	@OneToOne(cascade=CascadeType.ALL,optional=false)
-	@PrimaryKeyJoinColumn
+	@OneToOne
+	@JoinColumn(nullable=false)
 	private User user;
-	
-	
-	
 	
 	
 	public User getUser() {
@@ -97,17 +93,17 @@ public class JobOffer {
 	public void setJobRef(String jobRef) {
 		this.jobRef = jobRef;
 	}
-	public ActivitySector getActivitySector() {
-		return activitySector;
-	}
-	public void setActivitySector(ActivitySector activitySector) {
-		this.activitySector = activitySector;
-	}
 	public Status getJobofferStatus() {
 		return jobofferStatus;
 	}
 	public void setJobofferStatus(Status jobofferStatus) {
 		this.jobofferStatus = jobofferStatus;
+	}
+	public ActivitySector getActivitySector() {
+		return activitySector;
+	}
+	public void setActivitySector(ActivitySector activitySector) {
+		this.activitySector = activitySector;
 	}
 	public JobType getJobType() {
 		return jobType;
@@ -115,6 +111,7 @@ public class JobOffer {
 	public void setJobType(JobType jobType) {
 		this.jobType = jobType;
 	}
+	
 	
 	
 	
