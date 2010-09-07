@@ -1,7 +1,6 @@
 package com.j4hr.app.joboffer.server.dao;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.j4hr.app.joboffer.server.dao.entities.User;
 import com.j4hr.app.joboffer.server.dao.user.UserDAO;
-import com.j4hr.app.joboffer.shared.entities.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
