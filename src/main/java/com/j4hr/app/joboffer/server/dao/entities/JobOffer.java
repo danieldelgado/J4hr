@@ -1,4 +1,4 @@
-package com.j4hr.app.joboffer.shared.entities;
+package com.j4hr.app.joboffer.server.dao.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,17 +1,12 @@
-package com.j4hr.app.joboffer.client.ext;
+package com.j4hr.app.joboffer.client.views.home.actions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.util.Margins;
-import com.extjs.gxt.ui.client.util.Padding;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Info;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Slider;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
@@ -28,24 +23,39 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
-import com.extjs.gxt.ui.client.widget.layout.HBoxLayout;
-import com.extjs.gxt.ui.client.widget.layout.HBoxLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.HBoxLayout.HBoxLayoutAlign;
-import com.google.gwt.user.client.Element;
 
-public class MenuBarJ4hr extends LayoutContainer{
-	private ContentPanel lcwest;  
-	private ContentPanel lccenter;  
 
-	@Override
-	protected void onRender(Element parent, int index) {
-		super.onRender(parent, index);
-
-		final Button createJobOffer = new Button("Create new job offer",new SelectionListener<ButtonEvent>(){
+/**
+ * Class provide all actions buttons used in HomeView 
+ * Each action button is referenced by public constant attribute
+ * @author fsznajderman
+ *
+ */
+public class ButtonActionFactory {
+	
+	public static final int CREATE_NEW_JOB_OFFER_ACTION=1;
+	
+	
+	
+	private ButtonActionFactory(){
+		//do not implemented
+	}
+	
+	public static Button buildButton(int refButton){
+		
+		switch (refButton) {
+		case CREATE_NEW_JOB_OFFER_ACTION:
+			return buildCreatejobOfferButton();
+			
+		default:
+			return null;
+			
+		}
+	}
+	
+	private static Button buildCreatejobOfferButton(){
+		return new Button("Create new job offer",new SelectionListener<ButtonEvent>(){
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -64,75 +74,20 @@ public class MenuBarJ4hr extends LayoutContainer{
 
 					@Override
 					public void componentSelected(ButtonEvent ce) {
-						w.close();
+						w.hide();
 						Info.display("title","<span> effectué </span>");
 					}
 				}));
-				panel.add(createForm1(w));
+				
+				panel.add(buildCreateJobOfferForm(w));
 				w.add(panel);
-				//				   w.setToolTip("The ExtGWT product page...");
-				//				   w.setUrl("http://www.extjs.com/products/gxt");
 				w.show();
-
 			}
 
 		});
-
-
-		//creation du conteneur global, avec un layout de type Border
-		ContentPanel panel = new ContentPanel();  
-		panel.setHeaderVisible(false);  
-		panel.setSize(800, 600);
-
-		panel.setLayout(new BorderLayout());  
-
-
-
-
-		//creation d'un container
-		lcwest = new ContentPanel();  
-		lcwest.setHeaderVisible(false);
-		lcwest.setHeading("ContentPanel");
-		//création du mode d'affichage du container ci dessus
-		HBoxLayout westLayout = new HBoxLayout();  
-
-		westLayout.setPadding(new Padding(0));  
-		westLayout.setHBoxLayoutAlign(HBoxLayoutAlign.STRETCH);  
-		lcwest.setLayout(westLayout);
-		HBoxLayoutData flex = new HBoxLayoutData();
-		flex.setFlex(100);
-		lcwest.add(new Button("Published"),flex);
-		lcwest.add(new Button("Unpublished"),flex);
-		lcwest.add(new Button("Draft"),flex);
-		lcwest.add(createJobOffer,flex);
-
-
-		//Layout qui indique ou va être affiché le contentpanel lcwest dans  ci dessus
-		BorderLayoutData west = new BorderLayoutData(LayoutRegion.NORTH, 50,100,250);  
-		west.setMargins(new Margins(0));  
-		//west.setSplit(true);  
-
-		panel.add(lcwest,west);
-
-
-
-		lccenter = new ContentPanel();  
-		lccenter.setHeaderVisible(false);  
-		lccenter.setLayout(new FitLayout());  
-		lccenter.add(new BasicArrayGrid());
-		BorderLayoutData center = new BorderLayoutData(LayoutRegion.CENTER);  
-		center.setMargins(new Margins(5));  
-
-		panel.add(lccenter, center);  
-
-		VBoxLayoutData vBoxData = new VBoxLayoutData(5, 5, 5, 5);  
-		vBoxData.setFlex(1);  
-
-		add(panel);  
 	}
-
-
-	private FormPanel createForm1(final Window parent) {  
+	
+	private static FormPanel buildCreateJobOfferForm(final Window parent) {  
 		VerticalPanel vp  = new VerticalPanel();  
 		FormData formData = new FormData();  
 		FormPanel simple = new FormPanel();  
@@ -140,17 +95,23 @@ public class MenuBarJ4hr extends LayoutContainer{
 		simple.setFrame(true);  
 		simple.setWidth(350);  
 
-		final TextField<String> firstName = new TextField<String>();  
-		firstName.setFieldLabel("Name");  
-		firstName.setAllowBlank(false);  
-		firstName.setData("aria-previous", simple.getButtonBar().getId());  
-		simple.add(firstName, formData);  
+		final TextField<String> positionTitle = new TextField<String>();  
+		positionTitle.setFieldLabel("Position title");  
+		positionTitle.setAllowBlank(false);  
+		positionTitle.setData("aria-previous", simple.getButtonBar().getId());  
+		simple.add(positionTitle, formData);  
 
-		TextField<String> email = new TextField<String>();  
-		email.setFieldLabel("Email");  
-		email.setAllowBlank(false);  
-		simple.add(email, formData);  
+		TextArea jobOfferDescription = new TextArea();  
+		jobOfferDescription.setPreventScrollbars(true);  
+		jobOfferDescription.setFieldLabel("jobOffer Description");  
+		simple.add(jobOfferDescription, formData);  
 
+		final TextField<Integer> numberOfPosition = new TextField<Integer>();  
+		numberOfPosition.setFieldLabel("Number of position");  
+		numberOfPosition.setAllowBlank(false);  
+		numberOfPosition.setData("aria-previous", simple.getButtonBar().getId());  
+		simple.add(numberOfPosition, formData);  
+		
 		List<String> stocks = new ArrayList<String>();  
 
 
@@ -225,17 +186,17 @@ public class MenuBarJ4hr extends LayoutContainer{
 		radioGroup2.add(radio4);  
 		simple.add(radioGroup2, formData);  
 
-		TextArea description = new TextArea();  
-		description.setPreventScrollbars(true);  
-		description.setFieldLabel("Description");  
-		simple.add(description, formData);  
+		TextArea comment = new TextArea();  
+		comment.setPreventScrollbars(true);  
+		comment.setFieldLabel("Comments");  
+		simple.add(comment, formData);  
 
 		Button b = new Button("Submit",new SelectionListener<ButtonEvent>(){
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				MessageBox mb = new MessageBox();
-				mb.setMessage(" Name " + firstName.getValue() );
+				mb.setMessage(" Name " + positionTitle.getValue() );
 				mb.show();
 				parent.hide();
 				Info.display("title", "Enregistrement effectué avec succès");
@@ -246,19 +207,11 @@ public class MenuBarJ4hr extends LayoutContainer{
 
 		simple.setButtonAlign(HorizontalAlignment.CENTER);  
 
-		//	    FormButtonBinding binding = new FormButtonBinding(simple);  
-		//	    binding.addButton(b);  
-
-		//	    SpinnerField spinnerField = new SpinnerField();  
-		//	    spinnerField.setIncrement(.1d);  
-		//	    spinnerField.getPropertyEditor().setType(Double.class);  
-		//	    spinnerField.getPropertyEditor().setFormat(NumberFormat.getFormat("00.0"));  
-		//	    spinnerField.setFieldLabel("Duration (s)");  
-		//	    spinnerField.setMinValue(-10d);  
-		//	    spinnerField.setMaxValue(10d);  
-		//  simple.add(spinnerField, formData);  
+	
 
 		return simple;  
 	}  
 	
+	
+
 }

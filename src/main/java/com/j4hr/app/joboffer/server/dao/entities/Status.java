@@ -1,4 +1,4 @@
-package com.j4hr.app.joboffer.shared.entities;
+package com.j4hr.app.joboffer.server.dao.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="JOB_TYPE")
-public class JobType {
+@Table(name="STATUS")
+public class Status {
+
 	
 	@GeneratedValue(strategy=GenerationType.AUTO) @Id
 	private int id;
-	@Column(name="LBL_JOB_TYPE",nullable=false)
-	private String lblJobType;
+	@Column(name="LBL_STATUS")
+	private String lblStatus;
+	
 	
 	public int getId() {
 		return id;
@@ -22,13 +24,13 @@ public class JobType {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getLblJobType() {
-		return lblJobType;
+	public String getLblStatus() {
+		return lblStatus;
 	}
-	public void setLblJobType(String lblJobType) {
-		this.lblJobType = lblJobType;
+	public void setLblStatus(String lblStatus) {
+		this.lblStatus = lblStatus;
 	}
-
+	
 	
 	
 }

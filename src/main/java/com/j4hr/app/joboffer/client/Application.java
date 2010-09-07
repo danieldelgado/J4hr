@@ -9,8 +9,8 @@ import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.j4hr.app.joboffer.client.views.AbstractView;
-import com.j4hr.app.joboffer.client.views.HomeView;
 import com.j4hr.app.joboffer.client.views.LoginView;
+import com.j4hr.app.joboffer.client.views.home.HomeView;
 
 
 
