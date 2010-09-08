@@ -2,11 +2,12 @@ package com.j4hr.app.joboffer.shared.rpc;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.j4hr.app.joboffer.shared.dto.UserDTO;
 
 @RemoteServiceRelativePath("springGwtServices/authRPCService")
 public interface AuthentificationRPCService extends RemoteService {
 	
-	public boolean checkUserAuth(String login, String pass);
+	public UserDTO checkUserAuth(String login, String pass);
 	
 	public void addNewUser();
 

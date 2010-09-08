@@ -6,12 +6,12 @@
  <persistence-unit name="j4hrPUTest" transaction-type="RESOURCE_LOCAL">
   <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-<class>com.j4hr.app.joboffer.shared.entities.JobOffer</class>
-		<class>com.j4hr.app.joboffer.shared.entities.User</class>
-		<class>com.j4hr.app.joboffer.shared.entities.TypeOfContract</class>
-		<class>com.j4hr.app.joboffer.shared.entities.ActivitySector</class>
-		<class>com.j4hr.app.joboffer.shared.entities.Status</class>
-		<class>com.j4hr.app.joboffer.shared.entities.JobType</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.JobOffer</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.User</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.TypeOfContract</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.ActivitySector</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.Status</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.JobType</class>
   <properties>
    <property name="hibernate.hbm2ddl.auto" value="update" /><!--create-drop-->
    <property name="hibernate.show_sql" value="true" />
