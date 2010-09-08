@@ -1,5 +1,7 @@
 package com.j4hr.app.joboffer.server.dao;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,5 +82,15 @@ public class JobOfferDAOTest {
 		JobOffer jloader = jobOfferDAO.findById(idjob);
 		Assert.assertNotNull(jloader);
 		Assert.assertNotNull(jloader.getId());
+	}
+	
+	@Test
+	public void loadAllJobOfferTest(){
+		List<JobOffer> jobOffers =  jobOfferDAO.findAll();
+		
+		Assert.assertNotNull("Not null list expected!",jobOffers);
+		Assert.assertTrue("la liste devrait contenir des éléments", jobOffers.size()>0);
+		
+		
 	}
 }

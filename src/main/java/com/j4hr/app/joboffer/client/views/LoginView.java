@@ -5,7 +5,6 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
@@ -17,7 +16,6 @@ import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.j4hr.app.joboffer.client.Application;
-import com.j4hr.app.joboffer.server.dao.entities.User;
 import com.j4hr.app.joboffer.shared.dto.UserDTO;
 import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCServiceAsync;
 
@@ -28,7 +26,6 @@ public class LoginView extends AbstractView {
 	
 	public LoginView(Application gui) {
 		super(gui);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

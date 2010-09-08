@@ -21,14 +21,12 @@ public abstract class AbstractJpaDAO<K,E> implements IDao<K,E>{
 
 	@Override
 	public E findById(K pk) {
-		
 		return entityManager.find(entityClass, pk);
 	}
 
 
 	@Override
 	public void persist(E entity) {
-		System.out.println("persit");
 		entityManager.persist(entity);
 		
 	}
@@ -43,5 +41,7 @@ public abstract class AbstractJpaDAO<K,E> implements IDao<K,E>{
 	public E merge(E entity){
 		return entityManager.merge(entity);
 	}
+	
+	
 
 }

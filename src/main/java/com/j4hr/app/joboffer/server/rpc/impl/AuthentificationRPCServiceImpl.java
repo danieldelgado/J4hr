@@ -8,7 +8,7 @@ import com.j4hr.app.joboffer.shared.dto.UserDTO;
 import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCService;
 
 
-
+//TODO Rename this service in LoginUIActionRPCService
 
 
 @Service("authRPCService")

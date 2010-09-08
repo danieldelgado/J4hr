@@ -103,7 +103,7 @@ public class BasicArrayGrid extends LayoutContainer {
     ContentPanel cp = new ContentPanel();
     
     cp.setBodyBorder(false);  
-    //cp.setIcon(Resources.ICONS.table());  
+   
     cp.setHeading("Draft Job Offer's list");  
     cp.setButtonAlign(HorizontalAlignment.CENTER);  
     cp.setLayout(new FitLayout());  
