@@ -24,6 +24,13 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.j4hr.app.joboffer.server.service.J4HrServices;
+import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
+import com.j4hr.app.joboffer.shared.dto.UserDTO;
+import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCServiceAsync;
+import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCService;
+import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCServiceAsync;
 
 
 /**
@@ -34,7 +41,10 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
  */
 public class ButtonActionFactory {
 	
+	private static final JobOfferUIActionRPCServiceAsync jobOfferRPCservice = JobOfferUIActionRPCServiceAsync.Util.getInstance();
+	
 	public static final int CREATE_NEW_JOB_OFFER_ACTION=1;
+	public static final int LOAD_ALL_JOB_OFFERS_ACTION=2;
 	
 	
 	
@@ -46,6 +56,9 @@ public class ButtonActionFactory {
 		
 		switch (refButton) {
 		case CREATE_NEW_JOB_OFFER_ACTION:
+			return buildCreatejobOfferButton();
+		case LOAD_ALL_JOB_OFFERS_ACTION:
+			
 			return buildCreatejobOfferButton();
 			
 		default:
@@ -74,7 +87,32 @@ public class ButtonActionFactory {
 
 					@Override
 					public void componentSelected(ButtonEvent ce) {
-						w.hide();
+						jobOfferRPCservice.loadAllJobOffersUIAction( new AsyncCallback<List<JobOfferDTO>>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						
+						MessageBox mb = new MessageBox();
+					
+						
+						mb.setMessage("Erreur pendant l'invocation du service distant ");
+						mb.show();
+						
+					}
+
+					@Override
+					public void onSuccess(List<JobOfferDTO> l) {
+						MessageBox mb = new MessageBox();
+						String msg = "Nb job offer";
+						mb.setMessage(msg  + " " + l.size());
+						mb.show();
+						
+						
+					}
+					
+					
+					
+				});
 						Info.display("title","<span> effectué </span>");
 					}
 				}));

@@ -22,7 +22,7 @@ import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCServiceAsync;
 public class LoginView extends AbstractView {
 
 	
-	private final AuthentificationRPCServiceAsync AuthService = AuthentificationRPCServiceAsync.Util.getInstance();
+	private final AuthentificationRPCServiceAsync authService = AuthentificationRPCServiceAsync.Util.getInstance();
 	
 	public LoginView(Application gui) {
 		super(gui);
@@ -52,7 +52,7 @@ public class LoginView extends AbstractView {
 				
 				
 				
-				AuthService.checkUserAuth(login.getValue(), password.getValue(), new AsyncCallback<UserDTO>(){
+				authService.checkUserAuth(login.getValue(), password.getValue(), new AsyncCallback<UserDTO>(){
 
 					@Override
 					public void onFailure(Throwable caught) {

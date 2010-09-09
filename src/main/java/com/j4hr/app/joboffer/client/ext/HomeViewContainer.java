@@ -32,6 +32,7 @@ public class HomeViewContainer extends LayoutContainer{
 		super.onRender(parent, index);
 
 		final Button createJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.CREATE_NEW_JOB_OFFER_ACTION);
+		final Button loadDraftJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.CREATE_NEW_JOB_OFFER_ACTION);
 				
 
 			
