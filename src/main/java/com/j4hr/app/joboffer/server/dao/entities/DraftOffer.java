@@ -6,11 +6,8 @@ import javax.persistence.Entity;
 @Entity
 public class DraftOffer extends JobOffer {
 
-	
-	
-	
-
-	StatusEnum getStatusOffer() {
+	@Override
+	public StatusEnum getStatusOffer() {
 		
 		return StatusEnum.Draft;
 	}

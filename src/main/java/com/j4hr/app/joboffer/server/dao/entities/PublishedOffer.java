@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 public class PublishedOffer extends JobOffer {
 	
 	
-	
-	StatusEnum getStatusOffer() {
+	@Override
+	public StatusEnum getStatusOffer() {
 		
 		return StatusEnum.Published;
 	}

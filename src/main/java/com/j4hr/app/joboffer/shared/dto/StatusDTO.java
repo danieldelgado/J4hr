@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 
-public class StatusDTO implements Serializable {
+import com.extjs.gxt.ui.client.data.BaseModelData;
+
+public class StatusDTO  implements Serializable {
 
 	private int id;
 	private String lblStatus;

@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 /**
- * Entity représentant un role RH s
+ * Entity representing one RH's User
  * @author fabricesznajderman
  *
  */
@@ -16,7 +16,10 @@ public final class RH extends User {
 	
 	@OneToMany
 	private List<JobOffer> jobOffers;
+	
 
+	
+	
 	public List<JobOffer> getJobOffers() {
 		return jobOffers;
 	}
@@ -24,7 +27,7 @@ public final class RH extends User {
 	public void setJobOffers(List<JobOffer> jobOffers) {
 		this.jobOffers = jobOffers;
 	}
-	
-	
 
+	
+	
 }

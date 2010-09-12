@@ -104,6 +104,11 @@ public class JobOffer {
 	}
 	
 	
+	public StatusEnum getStatusOffer() {
+		throw new UnsupportedOperationException("This méthod can not  be invoked directly on this class. You must use JobOffer's sub-classes");
+	}
+	
+	
 	
 	
 	

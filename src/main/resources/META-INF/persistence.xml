@@ -14,7 +14,6 @@
 		<class>com.j4hr.app.joboffer.server.dao.entities.RH</class>
 		<class>com.j4hr.app.joboffer.server.dao.entities.TypeOfContract</class>
 		<class>com.j4hr.app.joboffer.server.dao.entities.ActivitySector</class>
-		<class>com.j4hr.app.joboffer.server.dao.entities.Status</class>
 		<class>com.j4hr.app.joboffer.server.dao.entities.JobType</class>
 
   <properties>

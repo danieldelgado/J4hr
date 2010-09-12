@@ -7,16 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.j4hr.app.joboffer.server.dao.entities.ActivitySector;
 import com.j4hr.app.joboffer.server.dao.entities.JobType;
-import com.j4hr.app.joboffer.server.dao.entities.Listeable;
 import com.j4hr.app.joboffer.server.dao.joboffer.ActivitySectorDAO;
-
 import com.j4hr.app.joboffer.server.dao.joboffer.JobTypeDAO;
 import com.j4hr.app.joboffer.server.dao.joboffer.TypeOfContractDAO;
 import com.j4hr.app.joboffer.server.service.J4hrListReferenceService;
 import com.j4hr.app.joboffer.server.service.TypeListEnum;
 import com.j4hr.app.joboffer.shared.dto.ActivitySectorDTO;
 import com.j4hr.app.joboffer.shared.dto.JobTypeDTO;
-import com.j4hr.app.joboffer.shared.dto.StatusDTO;
 
 /**
  * Classe de service permettant de gérer les listes de référence

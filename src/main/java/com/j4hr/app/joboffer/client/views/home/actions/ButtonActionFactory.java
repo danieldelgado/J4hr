@@ -6,10 +6,10 @@ import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Slider;
-import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
@@ -25,12 +25,9 @@ import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.j4hr.app.joboffer.client.data.StatusDatas;
 import com.j4hr.app.joboffer.client.ext.CreateJobOfferForm;
-import com.j4hr.app.joboffer.server.service.J4HrServices;
 import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
-import com.j4hr.app.joboffer.shared.dto.UserDTO;
-import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCServiceAsync;
-import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCService;
 import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCServiceAsync;
 
 
@@ -158,15 +155,22 @@ public class ButtonActionFactory {
 		List<String> stocks = new ArrayList<String>();  
 
 
-		List<String> store = new ArrayList<String>();  
-
-
-		//	    ComboBox<String> combo = new ComboBox<String>();  
-		//	    combo.setFieldLabel("Company");  
-		//	    combo.setDisplayField("name");  
-		//	    combo.setTriggerAction(TriggerAction.ALL);  
-		//	    combo.setStore(store);  
-		//	    simple.add(combo, formData);  
+		ListStore<StatusDatas> store = new ListStore<StatusDatas>();
+//
+//		StatusDatas sd = new StatusDatas();
+//		
+//		sd.set("stat1", "Draft");
+//		store.add(sd);
+//		sd = new StatusDatas();
+//		sd.set("stat2", "Published");
+//		store.add(sd);
+//		
+//		ComboBox<StatusDatas> combo = new ComboBox<StatusDatas>();
+//		combo.setFieldLabel("Status");
+//		combo.setDisplayField("name");
+//		combo.setTriggerAction(TriggerAction.ALL);
+//		combo.setStore(store);
+//		simple.add(combo, formData);  
 
 		DateField date = new DateField();  
 		date.setFieldLabel("Birthday");  
@@ -254,6 +258,10 @@ public class ButtonActionFactory {
 
 		return simple;  
 	}  
+	
+	
+	
+	
 	
 	
 
