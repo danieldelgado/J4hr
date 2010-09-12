@@ -162,4 +162,70 @@ public void loadJobOfferByRHUserTest(){
 }
 
 
+@Test
+@Rollback(false)
+public void loadDraftOfferByRHUserTest(){
+	RH creator = new RH();
+
+	creator.setFirstname("RH");
+	creator.setLastname("Jerome");
+	creator.setLogin("rJerome");
+	creator.setPassword("jerome");
+	creator.setMail("jerome@gmail.com");
+
+	
+	JobOffer jo = new DraftOffer();
+	JobOffer jo2 = new PublishedOffer();
+	
+	JobType jobType =jobTypeDAO.findById(1);
+
+	TypeOfContract toc = typeOfContractDAO.findById(2);
+	ActivitySector activitySector = activitySectorDAO.findById(1);
+	System.out.println(activitySector.getId());
+	System.out.println(activitySector.getLblActivitySector());
+	jo.setJobDescription(".net developpeur");
+	jo.setJobRef("DOTNETDEV");
+	
+	jo.setNbPosition(1);
+	jo.setTypeOfContract(toc);
+	
+	jo.setJobType(jobType);
+	jo.setActivitySector(activitySector);
+	
+	jobOfferDAO.persist(jo);
+	
+	
+
+	
+	jobType =jobTypeDAO.findById(1);
+
+	toc = typeOfContractDAO.findById(2);
+	activitySector = activitySectorDAO.findById(1);
+	
+	jo2.setJobDescription(".net developpeur");
+	jo2.setJobRef("DOTNETDEV");
+	
+	jo2.setNbPosition(1);
+	jo2.setTypeOfContract(toc);
+	
+	jo2.setJobType(jobType);
+	jo2.setActivitySector(activitySector);
+	
+	jobOfferDAO.persist(jo2);
+	
+	List<JobOffer> l = new ArrayList<JobOffer>();
+	l.add(jo);
+	l.add(jo2);
+	creator.setJobOffers(l); 
+	userDAO.persist(creator);
+	
+	RH rh = (RH)userDAO.findById(creator.getId());
+	
+	Assert.assertEquals(2, rh.getJobOffers().size());
+	
+	
+
+}
+
+
 }
