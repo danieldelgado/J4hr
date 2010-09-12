@@ -8,6 +8,7 @@
 	<!--  inherit css based theme -->
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 
+ 	
 	<!-- Specify the app entry point class.                         -->
 	<entry-point class='com.j4hr.app.joboffer.client.Application' />
 

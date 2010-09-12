@@ -1,5 +1,6 @@
 package com.j4hr.app.joboffer.server.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -11,11 +12,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.j4hr.app.joboffer.server.dao.entities.*;
-
+import com.j4hr.app.joboffer.server.dao.entities.ActivitySector;
+import com.j4hr.app.joboffer.server.dao.entities.DraftOffer;
+import com.j4hr.app.joboffer.server.dao.entities.JobOffer;
+import com.j4hr.app.joboffer.server.dao.entities.JobType;
+import com.j4hr.app.joboffer.server.dao.entities.PublishedOffer;
+import com.j4hr.app.joboffer.server.dao.entities.RH;
+import com.j4hr.app.joboffer.server.dao.entities.TypeOfContract;
+import com.j4hr.app.joboffer.server.dao.entities.UnPublishedOffer;
+import com.j4hr.app.joboffer.server.dao.entities.User;
 import com.j4hr.app.joboffer.server.dao.joboffer.ActivitySectorDAO;
 import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferDAO;
-import com.j4hr.app.joboffer.server.dao.joboffer.JobOfferStatusDAO;
 import com.j4hr.app.joboffer.server.dao.joboffer.JobTypeDAO;
 import com.j4hr.app.joboffer.server.dao.joboffer.TypeOfContractDAO;
 import com.j4hr.app.joboffer.server.dao.user.UserDAO;
@@ -31,8 +38,7 @@ public class JobOfferDAOTest {
 	private TypeOfContractDAO typeOfContractDAO;
 	@Autowired
 	private UserDAO userDAO;
-	@Autowired
-	private JobOfferStatusDAO statusDAO;
+	
 	@Autowired
 	private JobTypeDAO jobTypeDAO;
 	@Autowired
@@ -42,7 +48,7 @@ public class JobOfferDAOTest {
 	@Rollback(false)
 	public void createJobOfferTest() {
 
-		JobOffer jo = new JobOffer();
+		JobOffer jo = new UnPublishedOffer();
 		//
 		User creator = new User();
 
@@ -54,7 +60,7 @@ public class JobOfferDAOTest {
 
 		userDAO.persist(creator);
 
-		Status status = statusDAO.findById(2);
+		
 		JobType jobType =jobTypeDAO.findById(2);
 
 		TypeOfContract toc = typeOfContractDAO.findById(2);
@@ -63,16 +69,13 @@ public class JobOfferDAOTest {
 		System.out.println(activitySector.getLblActivitySector());
 		jo.setJobDescription(".net developpeur");
 		jo.setJobRef("DOTNETDEV");
-		jo.setUser(creator);
+		//jo.setUser(creator);
 		jo.setNbPosition(1);
 		jo.setTypeOfContract(toc);
-		jo.setJobofferStatus(status);
+		
 		jo.setJobType(jobType);
 		jo.setActivitySector(activitySector);
-		System.out.println(jo.getId());
-		System.out.println(jo.getUser().getId());
-		// System.out.println(toc.getIdTypeOfContract());
-
+		
 		jobOfferDAO.persist(jo);
 
 		Assert.assertNotNull(jo.getId());
@@ -93,4 +96,70 @@ public class JobOfferDAOTest {
 		
 		
 	}
+
+@Test
+@Rollback(false)
+public void loadJobOfferByRHUserTest(){
+	RH creator = new RH();
+
+	creator.setFirstname("RH");
+	creator.setLastname("Pierrette");
+	creator.setLogin("rpierrette");
+	creator.setPassword("pierret");
+	creator.setMail("priette@gmail.com");
+
+	
+	JobOffer jo = new DraftOffer();
+
+	
+	JobType jobType =jobTypeDAO.findById(1);
+
+	TypeOfContract toc = typeOfContractDAO.findById(2);
+	ActivitySector activitySector = activitySectorDAO.findById(1);
+	System.out.println(activitySector.getId());
+	System.out.println(activitySector.getLblActivitySector());
+	jo.setJobDescription(".net developpeur");
+	jo.setJobRef("DOTNETDEV");
+	
+	jo.setNbPosition(1);
+	jo.setTypeOfContract(toc);
+	
+	jo.setJobType(jobType);
+	jo.setActivitySector(activitySector);
+	
+	jobOfferDAO.persist(jo);
+	
+	JobOffer jo2 = new PublishedOffer();
+
+	
+	jobType =jobTypeDAO.findById(1);
+
+	toc = typeOfContractDAO.findById(2);
+	activitySector = activitySectorDAO.findById(1);
+	
+	jo2.setJobDescription(".net developpeur");
+	jo2.setJobRef("DOTNETDEV");
+	
+	jo2.setNbPosition(1);
+	jo2.setTypeOfContract(toc);
+	
+	jo2.setJobType(jobType);
+	jo2.setActivitySector(activitySector);
+	
+	jobOfferDAO.persist(jo2);
+	
+	List<JobOffer> l = new ArrayList<JobOffer>();
+	l.add(jo);
+	l.add(jo2);
+	creator.setJobOffers(l); 
+	userDAO.persist(creator);
+	
+	RH rh = (RH)userDAO.findById(creator.getId());
+	System.out.println("nb " + rh.getJobOffers().size());
+	Assert.assertEquals(2, rh.getJobOffers().size());
+
+
+}
+
+
 }

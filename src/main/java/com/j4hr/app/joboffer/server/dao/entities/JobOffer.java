@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name="JOB_OFFER")
 public class JobOffer {
+	
+	protected JobOffer(){
+		
+	}
+	
 	@GeneratedValue(strategy=GenerationType.AUTO) @Id
 	private int id;
 	@Column(name="POSITION_TITLE")
@@ -24,9 +29,10 @@ public class JobOffer {
 	@Column(name="JOB_REF",nullable=false)
 	private String jobRef;
 	
-	@OneToOne
-	@JoinColumn(nullable=false)
-	private Status jobofferStatus;
+	
+	
+	
+
 
 	@OneToOne
 	@JoinColumn(nullable=false)
@@ -39,18 +45,8 @@ public class JobOffer {
 	@OneToOne
 	@JoinColumn(nullable=false)
 	private JobType jobType;
-	
-	@OneToOne
-	@JoinColumn(nullable=false)
-	private User user;
-	
-	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User creator) {
-		this.user = creator;
-	}
+
+
 	public TypeOfContract getTypeOfContract() {
 		return typeOfContract;
 	}
@@ -93,12 +89,7 @@ public class JobOffer {
 	public void setJobRef(String jobRef) {
 		this.jobRef = jobRef;
 	}
-	public Status getJobofferStatus() {
-		return jobofferStatus;
-	}
-	public void setJobofferStatus(Status jobofferStatus) {
-		this.jobofferStatus = jobofferStatus;
-	}
+	
 	public ActivitySector getActivitySector() {
 		return activitySector;
 	}
@@ -111,6 +102,7 @@ public class JobOffer {
 	public void setJobType(JobType jobType) {
 		this.jobType = jobType;
 	}
+	
 	
 	
 	

@@ -1,7 +1,6 @@
 package com.j4hr.app.joboffer.server.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,9 @@ import com.j4hr.app.joboffer.server.dao.user.UserDAO;
 import com.j4hr.app.joboffer.server.service.J4HrServices;
 import com.j4hr.app.joboffer.shared.dto.ActivitySectorDTO;
 import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
+import com.j4hr.app.joboffer.shared.dto.JobTypeDTO;
+import com.j4hr.app.joboffer.shared.dto.StatusDTO;
+import com.j4hr.app.joboffer.shared.dto.TypeOfContractDTO;
 import com.j4hr.app.joboffer.shared.dto.UserDTO;
 
 /**
@@ -36,10 +38,11 @@ public class J4HrServicesImpl implements J4HrServices{
 	
 	
 	@Override
-	public UserDTO checkUserExist(String login, String pass) {
-		final UserDTO userDTO=new UserDTO();
+	public UserDTO checIfkUserExist(String login, String pass) {
+		UserDTO userDTO = null;
 		try {
 			User user= userDAO.findUserByLogin(login, pass);
+			userDTO=new UserDTO();
 			userDTO.setFirstname(user.getFirstname());
 			userDTO.setLastname(user.getLastname());
 			userDTO.setMail(user.getMail());
@@ -60,27 +63,42 @@ public class J4HrServicesImpl implements J4HrServices{
 	public List<JobOfferDTO> loadAllDraftJobOffer() {
 		
 		List<JobOffer> jobOffers = jobOfferDAO.findAll();
-		//TODO utilisation d'un transformer
+		//TODO utilisation d'un transformer/!\
 		
 		
 		List<JobOfferDTO> jobOfferDTOs = new ArrayList<JobOfferDTO>();
+		
 		for(JobOffer j:jobOffers){
 			JobOfferDTO joDTO = new JobOfferDTO();
 			joDTO.setId(j.getId());
-			ActivitySectorDTO activitySectorDTO = new ActivitySectorDTO();
-			joDTO.setActivitySector(j.getActivitySector());
-			joDTO.setJobofferStatus(j.getJobofferStatus());
+			final ActivitySectorDTO activitySectorDTO = new ActivitySectorDTO();
+			activitySectorDTO.setId(j.getActivitySector().getId());
+			activitySectorDTO.setLblActivitySector(j.getActivitySector().getLblActivitySector());
+			joDTO.setActivitySector(activitySectorDTO);
+			
+			final StatusDTO statusDTO = new StatusDTO();
+			
+			joDTO.setJobofferStatus(statusDTO);
+			
 			joDTO.setJobRef(j.getJobRef());
-			joDTO.setJobType(j.getJobType());
+			
 			joDTO.setNbPosition(j.getNbPosition());
 			joDTO.setPositionTile(j.getPositionTile());
 			joDTO.setTags(j.getTags());
-			joDTO.setTypeOfContract(j.getTypeOfContract());
-			joDTO.setUser(j.getUser());
+			
+			final TypeOfContractDTO typeOfContractDTO = new TypeOfContractDTO();
+			typeOfContractDTO.setId(j.getTypeOfContract().getId());
+			typeOfContractDTO.setLblTypeOfContract(j.getTypeOfContract().getLblTypeOfContract());
+			joDTO.setTypeOfContract(typeOfContractDTO);
+			
+			final UserDTO userDTO = new UserDTO();
+			joDTO.setUser(userDTO);
+			
+			final JobTypeDTO  jobTypeDTO = new JobTypeDTO();
+			jobTypeDTO.setId(j.getJobType().getId());
+			jobTypeDTO.setLblJobType(j.getJobType().getLblJobType());
 			
 			jobOfferDTOs.add(joDTO);
-			
-			
 			
 		}
 		

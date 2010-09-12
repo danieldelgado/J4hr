@@ -26,7 +26,7 @@ public class AuthentificationRPCServiceImpl implements AuthentificationRPCServic
 	public UserDTO checkUserAuth(String login, String pass) {
 		
 		
-		return j4hrHrServices.checkUserExist(login, pass);
+		return j4hrHrServices.checIfkUserExist(login, pass);
 	}
 	
 	

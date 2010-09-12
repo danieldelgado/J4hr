@@ -2,19 +2,6 @@ package com.j4hr.app.joboffer.shared.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-import com.j4hr.app.joboffer.server.dao.entities.ActivitySector;
-import com.j4hr.app.joboffer.server.dao.entities.JobType;
-import com.j4hr.app.joboffer.server.dao.entities.Status;
-import com.j4hr.app.joboffer.server.dao.entities.TypeOfContract;
-import com.j4hr.app.joboffer.server.dao.entities.User;
-
 public class JobOfferDTO implements Serializable {
 
 	public JobOfferDTO(){
@@ -40,9 +27,9 @@ public class JobOfferDTO implements Serializable {
 	
 	private ActivitySectorDTO activitySector;
 	
-	private JobType jobType;
+	private JobTypeDTO jobType;
 	
-	private User user;
+	private UserDTO user;
 
 	public int getId() {
 		return id;
@@ -116,19 +103,19 @@ public class JobOfferDTO implements Serializable {
 		this.activitySector = activitySector;
 	}
 
-	public JobType getJobType() {
+	public JobTypeDTO getJobType() {
 		return jobType;
 	}
 
-	public void setJobType(JobType jobType) {
+	public void setJobType(JobTypeDTO jobType) {
 		this.jobType = jobType;
 	}
 
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
 	}
 	

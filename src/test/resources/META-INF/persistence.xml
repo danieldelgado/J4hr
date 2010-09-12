@@ -7,10 +7,13 @@
   <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<class>com.j4hr.app.joboffer.server.dao.entities.JobOffer</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.DraftOffer</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.PublishedOffer</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.UnPublishedOffer</class>
 		<class>com.j4hr.app.joboffer.server.dao.entities.User</class>
+		<class>com.j4hr.app.joboffer.server.dao.entities.RH</class>
 		<class>com.j4hr.app.joboffer.server.dao.entities.TypeOfContract</class>
 		<class>com.j4hr.app.joboffer.server.dao.entities.ActivitySector</class>
-		<class>com.j4hr.app.joboffer.server.dao.entities.Status</class>
 		<class>com.j4hr.app.joboffer.server.dao.entities.JobType</class>
   <properties>
    <property name="hibernate.hbm2ddl.auto" value="update" /><!--create-drop-->

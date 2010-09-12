@@ -32,7 +32,7 @@ public class HomeViewContainer extends LayoutContainer{
 		super.onRender(parent, index);
 
 		final Button createJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.CREATE_NEW_JOB_OFFER_ACTION);
-		final Button loadDraftJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.CREATE_NEW_JOB_OFFER_ACTION);
+		final Button loadDraftJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.LOAD_ALL_JOB_OFFERS_ACTION);
 				
 
 			
@@ -61,7 +61,7 @@ public class HomeViewContainer extends LayoutContainer{
 		
 		lcwest.add(new Button("Published"),flex);
 		lcwest.add(new Button("Unpublished"),flex);
-		lcwest.add(new Button("Draft"),flex);
+		lcwest.add(loadDraftJobOffer,flex);
 		lcwest.add(createJobOffer,flex);
 
 

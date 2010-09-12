@@ -8,7 +8,7 @@ import com.j4hr.app.joboffer.shared.dto.UserDTO;
 
 public interface J4HrServices {
 
-	public UserDTO checkUserExist(String login,String pass);
+	public UserDTO checIfkUserExist(String login,String pass);
 	
 	public List<JobOfferDTO> loadAllDraftJobOffer();
 

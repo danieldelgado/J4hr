@@ -1,4 +1,4 @@
-package com.j4hr.app.joboffer.client.views.home.actions;
+package com.j4hr.app.joboffer.client.ext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,6 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Slider;
-import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
@@ -22,116 +21,11 @@ import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TimeField;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.j4hr.app.joboffer.client.ext.CreateJobOfferForm;
-import com.j4hr.app.joboffer.server.service.J4HrServices;
-import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
-import com.j4hr.app.joboffer.shared.dto.UserDTO;
-import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCServiceAsync;
-import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCService;
-import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCServiceAsync;
 
-
-/**
- * Class provide all actions buttons used in HomeView 
- * Each action button is referenced by public constant attribute
- * @author fsznajderman
- *
- */
-public class ButtonActionFactory {
+public class CreateJobOfferForm extends FormPanel {
 	
-	private static final JobOfferUIActionRPCServiceAsync jobOfferRPCservice = JobOfferUIActionRPCServiceAsync.Util.getInstance();
-	
-	public static final int CREATE_NEW_JOB_OFFER_ACTION=1;
-	public static final int LOAD_ALL_JOB_OFFERS_ACTION=2;
-	
-	
-	
-	private ButtonActionFactory(){
-		//do not implemented
-	}
-	
-	public static Button buildButton(int refButton){
-		
-		switch (refButton) {
-		case CREATE_NEW_JOB_OFFER_ACTION: 
-			return buildCreatejobOfferButton();
-		case LOAD_ALL_JOB_OFFERS_ACTION:
-			
-			return buildLoadjobOfferButton();
-			
-		default:
-			return null;
-			
-		}
-	}
-	
-	private static Button buildCreatejobOfferButton(){
-		return new Button("Create new job offer",new SelectionListener<ButtonEvent>(){
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-
-				final Window w = new Window();        
-				w.setHeading("Product Information");
-				w.setModal(true);
-				w.setSize(600, 400);
-				w.setMaximizable(true);
-				FormPanel panel = new FormPanel();  
-				panel.setHeaderVisible(false);  
-				panel.setSize(599, 400);
-
-				panel.setLayout(new BorderLayout());	
-				panel.add(new CreateJobOfferForm(w));
-				w.add(panel);
-				w.show();
-			}
-
-		});
-	}
-	
-	
-	private static Button buildLoadjobOfferButton(){
-		return new Button("Draft",new SelectionListener<ButtonEvent>(){
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-
-				jobOfferRPCservice.loadAllJobOffersUIAction( new AsyncCallback<List<JobOfferDTO>>(){
-
-					@Override
-					public void onFailure(Throwable caught) {
-						
-						MessageBox mb = new MessageBox();
-					
-						
-						mb.setMessage("Erreur pendant l'invocation du service distant ");
-						mb.show();
-						
-					}
-
-					@Override
-					public void onSuccess(List<JobOfferDTO> l) {
-						MessageBox mb = new MessageBox();
-						String msg = "Nb job offer";
-						mb.setMessage(msg  + " " + l.size());
-						mb.show();
-						
-						
-					}
-					
-					
-					
-				});
-			}
-
-		});
-	}
-	
-	private static FormPanel buildCreateJobOfferForm(final Window parent) {  
-		//VerticalPanel vp  = new VerticalPanel();  
+	public CreateJobOfferForm(final Window parent) {
 		FormData formData = new FormData();  
 		FormPanel simple = new FormPanel();  
 		simple.setHeaderVisible(false);  
@@ -234,7 +128,7 @@ public class ButtonActionFactory {
 		comment.setFieldLabel("Comments");  
 		simple.add(comment, formData);  
 
-		Button b = new Button("Submit",new SelectionListener<ButtonEvent>(){
+		Button b = new Button("Create",new SelectionListener<ButtonEvent>(){
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
@@ -248,13 +142,7 @@ public class ButtonActionFactory {
 		simple.addButton(b);  
 		simple.addButton(new Button("Cancel"));  
 
-		simple.setButtonAlign(HorizontalAlignment.CENTER);  
-
-	
-
-		return simple;  
-	}  
-	
-	
+		simple.setButtonAlign(HorizontalAlignment.CENTER);// TODO Auto-generated constructor stub
+	}
 
 }

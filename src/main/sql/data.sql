@@ -1,3 +1,4 @@
+delete from users_job_offer;
 delete from job_offer;
 delete from users;
 delete from job_type;
@@ -10,7 +11,7 @@ delete from status;
 
 --data
 
-insert into users (id,lastname,firstname,password,login,mail) values (1,'sznajderman','fabrice','220276','fsznajderman','fabszn@gmail.com');
+insert into users (id,lastname,firstname,password,login,mail,dtype) values (1,'sznajderman','fabrice','220276','fsznajderman','fabszn@gmail.com','RH');
 
 
 insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (1,'Banque');
@@ -34,7 +35,7 @@ insert into status (id, lbl_status) values (3,'Unpublished');
 insert into type_of_contract (id, LBL_TYPE_OF_CONTRACT) values (1,'CDI');
 insert into type_of_contract (id, LBL_TYPE_OF_CONTRACT) values (2,'CDD');
 
-insert into job_offer (id,
+insert into job_offer (dtype,id,
 position_title,
 jobtype_id,
 job_description,
@@ -42,7 +43,5 @@ activitysector_id,
 typeofcontract_id,
 job_ref,
 tags,
-nb_position,
-user_id,
-JOBOFFERSTATUS_ID) 
-values (1,'Developpeur',1,'Expert sur language Java',1,1,'DEVJAVA01','java dev',1,1,1);
+nb_position) 
+values ('DraftOffer',1,'Developpeur',1,'Expert sur language Java',1,1,'DEVJAVA01','java dev',1);

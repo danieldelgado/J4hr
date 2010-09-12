@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable {
 	
-	public UserDTO(){
-		
-	}
+	private int id;
 	
 	private String lastname;
 	
@@ -15,6 +13,8 @@ public class UserDTO implements Serializable {
 	private String login;
 	
 	private String mail;
+	
+	
 
 	public String getLastname() {
 		return lastname;
@@ -46,6 +46,14 @@ public class UserDTO implements Serializable {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

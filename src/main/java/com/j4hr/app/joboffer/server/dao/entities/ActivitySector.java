@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ACTIVITY_SECTOR")
-public class ActivitySector {
+public class ActivitySector implements Listeable{
 	
 	@GeneratedValue @Id
 	private int id;
@@ -27,6 +27,11 @@ public class ActivitySector {
 	}
 	public void setLblActivitySector(String lblActivitySector) {
 		this.lblActivitySector = lblActivitySector;
+	}
+	
+	@Override
+	public String getLabel() {
+		return lblActivitySector;
 	}
 	
 	
