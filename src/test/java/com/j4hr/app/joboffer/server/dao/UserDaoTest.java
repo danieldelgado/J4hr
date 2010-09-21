@@ -13,7 +13,7 @@ import com.j4hr.app.joboffer.server.dao.entities.User;
 import com.j4hr.app.joboffer.server.dao.user.UserDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(locations={"dao-context.xml"})
 @Transactional
 public class UserDaoTest {
 	

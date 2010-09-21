@@ -28,7 +28,7 @@ import com.j4hr.app.joboffer.server.dao.joboffer.TypeOfContractDAO;
 import com.j4hr.app.joboffer.server.dao.user.UserDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(locations={"dao-context.xml"})
 @Transactional
 public class JobOfferDAOTest {
 
