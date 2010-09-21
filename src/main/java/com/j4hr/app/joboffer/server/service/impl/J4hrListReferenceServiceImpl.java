@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.j4hr.app.joboffer.server.dao.entities.ActivitySector;
 import com.j4hr.app.joboffer.server.dao.entities.JobType;
+import com.j4hr.app.joboffer.server.dao.entities.TypeOfContract;
 import com.j4hr.app.joboffer.server.dao.joboffer.ActivitySectorDAO;
 import com.j4hr.app.joboffer.server.dao.joboffer.JobTypeDAO;
 import com.j4hr.app.joboffer.server.dao.joboffer.TypeOfContractDAO;
@@ -14,12 +16,14 @@ import com.j4hr.app.joboffer.server.service.J4hrListReferenceService;
 import com.j4hr.app.joboffer.server.service.TypeListEnum;
 import com.j4hr.app.joboffer.shared.dto.ActivitySectorDTO;
 import com.j4hr.app.joboffer.shared.dto.JobTypeDTO;
+import com.j4hr.app.joboffer.shared.dto.TypeOfContractDTO;
 
 /**
- * Classe de service permettant de gŽrer les listes de rŽfŽrence
+ * Classe de service permettant de gï¿½rer les listes de rï¿½fï¿½rence
  * @author fabricesznajderman
  *
  */
+@Service("J4hrListReferenceService")
 public class J4hrListReferenceServiceImpl implements J4hrListReferenceService {
 
 	
@@ -46,6 +50,11 @@ public class J4hrListReferenceServiceImpl implements J4hrListReferenceService {
 			return convertJobTypeToDTOList(l);
 		}
 		
+		if(TypeListEnum.TypeOfContract.equals(type)){ 
+			List<TypeOfContract> l = typeOfContractDAO.findAll();
+			return convertTypeOfContractToDTOList(l);
+		}
+		
 	
 		throw new IllegalArgumentException("[TypeList] give in parameter is not available");
 		
@@ -68,7 +77,27 @@ public class J4hrListReferenceServiceImpl implements J4hrListReferenceService {
 	}
 	
 	private List<JobTypeDTO> convertJobTypeToDTOList(List<JobType> l ){
-		return null;
+		List<JobTypeDTO> finalList = new ArrayList<JobTypeDTO>();
+		for(JobType as : l){
+			JobTypeDTO asDTO = new JobTypeDTO();
+			asDTO.setId(as.getId());
+			asDTO.setLblJobType(as.getLblJobType());
+			finalList.add(asDTO);
+		}
+		
+		return finalList;
+	}
+	
+	private List<TypeOfContractDTO> convertTypeOfContractToDTOList(List<TypeOfContract> l ){
+		List<TypeOfContractDTO> finalList = new ArrayList<TypeOfContractDTO>();
+		for(TypeOfContract as : l){
+			TypeOfContractDTO asDTO = new TypeOfContractDTO();
+			asDTO.setId(as.getId());
+			asDTO.setLblTypeOfContract(as.getLblTypeOfContract());
+			finalList.add(asDTO);
+		}
+		
+		return finalList;
 	}
 	
 	

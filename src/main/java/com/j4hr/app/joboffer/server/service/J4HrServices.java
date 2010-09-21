@@ -11,5 +11,8 @@ public interface J4HrServices {
 	public UserDTO checIfkUserExist(String login,String pass);
 	
 	public List<JobOfferDTO> loadAllDraftJobOffer();
+	
+	
+	public void createJobOffer(JobOfferDTO jobOfferDTO);
 
 }

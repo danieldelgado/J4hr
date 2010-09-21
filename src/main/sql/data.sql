@@ -19,12 +19,12 @@ insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (2,'Assurance');
 insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (3,'Industries');
 insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (4,'Services');
 insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (5,'Service public');
-insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (6,'TŽlŽcoms');
+insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (6,'Tï¿½lï¿½coms');
 
 insert into job_type (id,LBL_JOB_TYPE) values (1,'Acheteur');
 insert into job_type (id,LBL_JOB_TYPE) values (2,'Architecte');
-insert into job_type (id,LBL_JOB_TYPE) values (3,'ChargŽ de recrutement');
-insert into job_type (id,LBL_JOB_TYPE) values (4,'DŽveloppeur');
+insert into job_type (id,LBL_JOB_TYPE) values (3,'Chargï¿½ de recrutement');
+insert into job_type (id,LBL_JOB_TYPE) values (4,'Dï¿½veloppeur');
 insert into job_type (id,LBL_JOB_TYPE) values (5,'Directeur de projet');
 insert into job_type (id,LBL_JOB_TYPE) values (6,'Technicien');
 
@@ -34,6 +34,7 @@ insert into status (id, lbl_status) values (3,'Unpublished');
 
 insert into type_of_contract (id, LBL_TYPE_OF_CONTRACT) values (1,'CDI');
 insert into type_of_contract (id, LBL_TYPE_OF_CONTRACT) values (2,'CDD');
+insert into type_of_contract (id, LBL_TYPE_OF_CONTRACT) values (3,'Stage');
 
 insert into job_offer (dtype,id,
 position_title,

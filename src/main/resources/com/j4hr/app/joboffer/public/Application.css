@@ -9,9 +9,9 @@ button {
   width: 100%
 }
 
-img {
+/**img {
   margin-top: 20px;
-}
+}*/
 
 .rootPanelLayout {
 position: absolute;

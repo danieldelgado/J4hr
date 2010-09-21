@@ -21,13 +21,13 @@ public class JobOfferDTO implements Serializable {
 	
 	private String jobRef;
 	
-	private StatusDTO jobofferStatus;
+	private String jobofferStatus;
 
-	private TypeOfContractDTO typeOfContract;
+	private String typeOfContract;
 	
-	private ActivitySectorDTO activitySector;
+	private String activitySector;
 	
-	private JobTypeDTO jobType;
+	private String jobType;
 	
 	private UserDTO user;
 
@@ -79,35 +79,35 @@ public class JobOfferDTO implements Serializable {
 		this.jobRef = jobRef;
 	}
 
-	public StatusDTO getJobofferStatus() {
+	public String getJobofferStatus() {
 		return jobofferStatus;
 	}
 
-	public void setJobofferStatus(StatusDTO jobofferStatus) {
+	public void setJobofferStatus(String jobofferStatus) {
 		this.jobofferStatus = jobofferStatus;
 	}
 
-	public TypeOfContractDTO getTypeOfContract() {
+	public String getTypeOfContract() {
 		return typeOfContract;
 	}
 
-	public void setTypeOfContract(TypeOfContractDTO typeOfContract) {
+	public void setTypeOfContract(String typeOfContract) {
 		this.typeOfContract = typeOfContract;
 	}
 
-	public ActivitySectorDTO getActivitySector() {
+	public String getActivitySector() {
 		return activitySector;
 	}
 
-	public void setActivitySector(ActivitySectorDTO activitySector) {
+	public void setActivitySector(String activitySector) {
 		this.activitySector = activitySector;
 	}
 
-	public JobTypeDTO getJobType() {
+	public String getJobType() {
 		return jobType;
 	}
 
-	public void setJobType(JobTypeDTO jobType) {
+	public void setJobType(String jobType) {
 		this.jobType = jobType;
 	}
 

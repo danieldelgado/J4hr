@@ -14,7 +14,6 @@ import com.j4hr.app.joboffer.server.service.J4HrServices;
 import com.j4hr.app.joboffer.shared.dto.ActivitySectorDTO;
 import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
 import com.j4hr.app.joboffer.shared.dto.JobTypeDTO;
-import com.j4hr.app.joboffer.shared.dto.StatusDTO;
 import com.j4hr.app.joboffer.shared.dto.TypeOfContractDTO;
 import com.j4hr.app.joboffer.shared.dto.UserDTO;
 
@@ -74,11 +73,11 @@ public class J4HrServicesImpl implements J4HrServices{
 			final ActivitySectorDTO activitySectorDTO = new ActivitySectorDTO();
 			activitySectorDTO.setId(j.getActivitySector().getId());
 			activitySectorDTO.setLblActivitySector(j.getActivitySector().getLblActivitySector());
-			joDTO.setActivitySector(activitySectorDTO);
+			joDTO.setActivitySector(activitySectorDTO.getLblActivitySector());
 			
-			final StatusDTO statusDTO = new StatusDTO();
+			//final StatusDTO statusDTO = new StatusDTO();
 			
-			joDTO.setJobofferStatus(statusDTO);
+			//joDTO.setJobofferStatus(statusDTO);
 			
 			joDTO.setJobRef(j.getJobRef());
 			
@@ -89,7 +88,7 @@ public class J4HrServicesImpl implements J4HrServices{
 			final TypeOfContractDTO typeOfContractDTO = new TypeOfContractDTO();
 			typeOfContractDTO.setId(j.getTypeOfContract().getId());
 			typeOfContractDTO.setLblTypeOfContract(j.getTypeOfContract().getLblTypeOfContract());
-			joDTO.setTypeOfContract(typeOfContractDTO);
+			joDTO.setTypeOfContract(typeOfContractDTO.getLblTypeOfContract());
 			
 			final UserDTO userDTO = new UserDTO();
 			joDTO.setUser(userDTO);
@@ -106,5 +105,20 @@ public class J4HrServicesImpl implements J4HrServices{
 		return jobOfferDTOs;
 	}
 
+
+	@Override
+	public void createJobOffer(JobOfferDTO jobOfferDTO) {
+		
+		
+		
+		
+		
+		//JobOffer jobOffer = 
+		
+	}
+
+	
+	
+	
 	
 }

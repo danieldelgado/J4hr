@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Slider;
@@ -23,9 +23,11 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.j4hr.app.joboffer.client.data.StatusDatas;
+import com.google.gwt.user.client.ui.ListBox;
 import com.j4hr.app.joboffer.client.ext.CreateJobOfferForm;
 import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
 import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCServiceAsync;
@@ -72,17 +74,13 @@ public class ButtonActionFactory {
 			public void componentSelected(ButtonEvent ce) {
 
 				final Window w = new Window();        
-				w.setHeading("Product Information");
+				w.setHeading("Create new job offer form");
 				w.setModal(true);
-				w.setSize(600, 400);
+				w.setSize(700, 590);
 				w.setMaximizable(true);
-				FormPanel panel = new FormPanel();  
-				panel.setHeaderVisible(false);  
-				panel.setSize(599, 400);
-
-				panel.setLayout(new BorderLayout());	
-				panel.add(new CreateJobOfferForm(w));
-				w.add(panel);
+				
+				
+				w.add(new CreateJobOfferForm(w));
 				w.show();
 			}
 
@@ -154,23 +152,11 @@ public class ButtonActionFactory {
 		
 		List<String> stocks = new ArrayList<String>();  
 
-
-		ListStore<StatusDatas> store = new ListStore<StatusDatas>();
-//
-//		StatusDatas sd = new StatusDatas();
-//		
-//		sd.set("stat1", "Draft");
-//		store.add(sd);
-//		sd = new StatusDatas();
-//		sd.set("stat2", "Published");
-//		store.add(sd);
-//		
-//		ComboBox<StatusDatas> combo = new ComboBox<StatusDatas>();
-//		combo.setFieldLabel("Status");
-//		combo.setDisplayField("name");
-//		combo.setTriggerAction(TriggerAction.ALL);
-//		combo.setStore(store);
-//		simple.add(combo, formData);  
+		ListBox statusList = new ListBox();
+		statusList.addItem("Draft");
+		statusList.addItem("Unpublished");
+		statusList.addItem("Publiched");
+		simple.add(statusList);
 
 		DateField date = new DateField();  
 		date.setFieldLabel("Birthday");  

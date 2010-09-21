@@ -20,5 +20,14 @@ public class JobOfferUIActionRPCServiceImpl implements	JobOfferUIActionRPCServic
 		
 		return j4hrService.loadAllDraftJobOffer();
 	}
+	
+	
+	
+	public void createJobOfferUIAction(JobOfferDTO jobOffer){
+		
+		
+		
+		
+	}
 
 }

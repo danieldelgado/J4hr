@@ -11,5 +11,12 @@ public interface JobOfferUIActionRPCService extends RemoteService {
 	
 	
 	public List<JobOfferDTO> loadAllJobOffersUIAction();
+	
+	
+	/**
+	 * Service de création d'une offre de poste
+	 * @param jobOffer
+	 */
+	public void createJobOfferUIAction(JobOfferDTO jobOffer);
 
 }
