@@ -19,12 +19,12 @@ insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (2,'Assurance');
 insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (3,'Industries');
 insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (4,'Services');
 insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (5,'Service public');
-insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (6,'T�l�coms');
+insert into activity_sector (id,LBL_ACTIVITY_SECTOR) values (6,'Télécoms');
 
 insert into job_type (id,LBL_JOB_TYPE) values (1,'Acheteur');
 insert into job_type (id,LBL_JOB_TYPE) values (2,'Architecte');
-insert into job_type (id,LBL_JOB_TYPE) values (3,'Charg� de recrutement');
-insert into job_type (id,LBL_JOB_TYPE) values (4,'D�veloppeur');
+insert into job_type (id,LBL_JOB_TYPE) values (3,'Chargé de recrutement');
+insert into job_type (id,LBL_JOB_TYPE) values (4,'Développeur');
 insert into job_type (id,LBL_JOB_TYPE) values (5,'Directeur de projet');
 insert into job_type (id,LBL_JOB_TYPE) values (6,'Technicien');
 

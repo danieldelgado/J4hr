@@ -28,6 +28,7 @@ import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
+import com.j4hr.app.joboffer.client.Application;
 import com.j4hr.app.joboffer.client.ext.CreateJobOfferForm;
 import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
 import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCServiceAsync;
@@ -52,11 +53,11 @@ public class ButtonActionFactory {
 		//do not implemented
 	}
 	
-	public static Button buildButton(int refButton){
+	public static Button buildButton(int refButton,Application gui){
 		
 		switch (refButton) {
 		case CREATE_NEW_JOB_OFFER_ACTION: 
-			return buildCreatejobOfferButton();
+			return buildCreatejobOfferButton(gui);
 		case LOAD_ALL_JOB_OFFERS_ACTION:
 			
 			return buildLoadjobOfferButton();
@@ -67,7 +68,7 @@ public class ButtonActionFactory {
 		}
 	}
 	
-	private static Button buildCreatejobOfferButton(){
+	private static Button buildCreatejobOfferButton(final Application gui){
 		return new Button("Create new job offer",new SelectionListener<ButtonEvent>(){
 
 			@Override
@@ -80,7 +81,7 @@ public class ButtonActionFactory {
 				w.setMaximizable(true);
 				
 				
-				w.add(new CreateJobOfferForm(w));
+				w.add(new CreateJobOfferForm(w,gui));
 				w.show();
 			}
 

@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
-public final class RH extends User {
+public class RH extends User {
 	
 	@OneToMany
 	private List<JobOffer> jobOffers;
@@ -26,6 +26,16 @@ public final class RH extends User {
 
 	public void setJobOffers(List<JobOffer> jobOffers) {
 		this.jobOffers = jobOffers;
+	}
+
+	@Override
+	public boolean isAdminProfile() {
+		return false;
+	}
+
+	@Override
+	public boolean isRHProfile() {
+		return true;
 	}
 
 	

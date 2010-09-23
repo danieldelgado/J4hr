@@ -45,7 +45,8 @@ public class JobOffer {
 	@OneToOne
 	@JoinColumn(nullable=false)
 	private JobType jobType;
-
+	
+	
 
 	public TypeOfContract getTypeOfContract() {
 		return typeOfContract;
@@ -105,7 +106,7 @@ public class JobOffer {
 	
 	
 	public StatusEnum getStatusOffer() {
-		throw new UnsupportedOperationException("This méthod can not  be invoked directly on this class. You must use JobOffer's sub-classes");
+		throw new UnsupportedOperationException("This method can not  be invoked directly on this class. You must use JobOffer's sub-classes");
 	}
 	
 	

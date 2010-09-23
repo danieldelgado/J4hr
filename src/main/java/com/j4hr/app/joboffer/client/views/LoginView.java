@@ -5,6 +5,7 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.LabelField;
@@ -17,6 +18,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.j4hr.app.joboffer.client.Application;
 import com.j4hr.app.joboffer.shared.dto.UserDTO;
+import com.j4hr.app.joboffer.shared.dto.UserProfileEnum;
 import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCServiceAsync;
 
 public class LoginView extends AbstractView {
@@ -30,7 +32,9 @@ public class LoginView extends AbstractView {
 
 	@Override
 	public Widget getContent() {
-
+		
+		
+		
 		ContentPanel panel = new ContentPanel();
 		panel.setHeaderVisible(true);
 		panel.setHeading("Authentification");
@@ -58,13 +62,7 @@ public class LoginView extends AbstractView {
 					public void onFailure(Throwable caught) {
 						caught.printStackTrace();
 						MessageBox mb = new MessageBox();
-					
-						StackTraceElement[] t = caught.getStackTrace();
-						String v = "";
-						for (int i = 0; i < t.length; i++) {
-							v.concat("-" + t[i]);
-						}
-						mb.setMessage("Erreur pendant l'invocation du service distant "+ v);
+						mb.setMessage("Erreur pendant l'invocation du service distant checkUserAuth");
 						mb.show();
 						
 					}
@@ -76,6 +74,12 @@ public class LoginView extends AbstractView {
 						
 						if(user != null){
 							msg = "Hello !";
+							
+							Info.display("Id User",""+user.getId());
+							Info.display("User name",""+user.getFirstname());
+							gui.getUsercontext().setName(user.getFirstname());
+							gui.getUsercontext().setId(user.getId());
+							gui.getUsercontext().setUserProfile(user.getUserProfile());
 							gui.display("home");
 						}else{
 							msg = "utilisateur inconnu!";
@@ -104,6 +108,9 @@ public class LoginView extends AbstractView {
 
 		return panel;
 	}
+	
+	
+	
 	
 	
 

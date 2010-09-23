@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.j4hr.app.joboffer.shared.dto.ActivitySectorDTO;
+import com.j4hr.app.joboffer.shared.dto.JobTypeDTO;
 import com.j4hr.app.joboffer.shared.dto.TypeOfContractDTO;
 
 
@@ -36,6 +38,40 @@ public class ListReferenceServiceTest {
 		Assert.assertNotNull(t);
 		Assert.assertNotNull(t.getId());
 		Assert.assertNotNull(t.getLblTypeOfContract());
+		
+	}
+	
+	@Test
+	public void jobTypeTest(){
+		
+		List<JobTypeDTO> l = (List<JobTypeDTO>)j4hrListReferenceService.loadReferenceList(TypeListEnum.JobType);
+		
+		Assert.assertNotNull(l);
+		Assert.assertEquals(6, l.size());
+		//On prend le premier élément de la liste
+		JobTypeDTO t = l.get(1);
+		
+		
+		Assert.assertNotNull(t);
+		Assert.assertNotNull(t.getId());
+		Assert.assertNotNull(t.getLblJobType());
+		
+	}
+	
+	@Test
+	public void activitySectorTest(){
+		
+		List<ActivitySectorDTO> l = (List<ActivitySectorDTO>)j4hrListReferenceService.loadReferenceList(TypeListEnum.ActivitySector);
+		
+		Assert.assertNotNull(l);
+		Assert.assertEquals(6, l.size());
+		//On prend le premier élément de la liste
+		ActivitySectorDTO t = l.get(1);
+		
+		
+		Assert.assertNotNull(t);
+		Assert.assertNotNull(t.getId());
+		Assert.assertNotNull(t.getLblActivitySector());
 		
 	}
 	

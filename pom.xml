@@ -121,6 +121,9 @@
 				<version>1.2</version>
 				<executions>
 					<execution>
+					<configuration>
+              			<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+           			 </configuration>
 						<goals>
 							<goal>compile</goal>
 							<goal>generateAsync</goal>

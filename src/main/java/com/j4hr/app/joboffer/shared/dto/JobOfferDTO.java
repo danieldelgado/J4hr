@@ -9,7 +9,7 @@ public class JobOfferDTO implements Serializable {
 		//do not implemented
 	}
 	
-	private int id;
+	private Integer id;
 	
 	private String positionTile;
 	
@@ -17,25 +17,25 @@ public class JobOfferDTO implements Serializable {
 	
 	private String tags;
 	
-	private int nbPosition;
+	private Integer nbPosition;
 	
 	private String jobRef;
 	
 	private String jobofferStatus;
 
-	private String typeOfContract;
+	private Integer typeOfContract;
 	
-	private String activitySector;
+	private Integer activitySector;
 	
-	private String jobType;
+	private Integer jobType;
 	
 	private UserDTO user;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,11 +63,11 @@ public class JobOfferDTO implements Serializable {
 		this.tags = tags;
 	}
 
-	public int getNbPosition() {
+	public Integer getNbPosition() {
 		return nbPosition;
 	}
 
-	public void setNbPosition(int nbPosition) {
+	public void setNbPosition(Integer nbPosition) {
 		this.nbPosition = nbPosition;
 	}
 
@@ -87,27 +87,27 @@ public class JobOfferDTO implements Serializable {
 		this.jobofferStatus = jobofferStatus;
 	}
 
-	public String getTypeOfContract() {
+	public Integer getTypeOfContract() {
 		return typeOfContract;
 	}
 
-	public void setTypeOfContract(String typeOfContract) {
+	public void setTypeOfContract(Integer typeOfContract) {
 		this.typeOfContract = typeOfContract;
 	}
 
-	public String getActivitySector() {
+	public Integer getActivitySector() {
 		return activitySector;
 	}
 
-	public void setActivitySector(String activitySector) {
+	public void setActivitySector(Integer activitySector) {
 		this.activitySector = activitySector;
 	}
 
-	public String getJobType() {
+	public Integer getJobType() {
 		return jobType;
 	}
 
-	public void setJobType(String jobType) {
+	public void setJobType(Integer jobType) {
 		this.jobType = jobType;
 	}
 

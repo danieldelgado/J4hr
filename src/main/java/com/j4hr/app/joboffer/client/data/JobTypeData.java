@@ -1,20 +1,23 @@
 package com.j4hr.app.joboffer.client.data;
 
-import java.io.Serializable;
-import java.util.Map;
-
 import com.extjs.gxt.ui.client.data.BaseModelData;
 
-public class StatusDatas extends BaseModelData implements Serializable {
-	
-	public static final String ID_KEY = "ID_STATUS";
-	public static final String ID_VALUE = "VALUE_STATUS";
+public class JobTypeData extends BaseModelData {
 
-	public StatusDatas(){
+	public static final String ID_KEY = "ID_JOB_TYPE";
+	public static final String ID_VALUE = "VALUE_JOB_TYPE";
+	
+	
+	public JobTypeData(){
 		
 	}
 	
-
+	public JobTypeData(Integer id, String value){
+		setId(id);
+		setValue(value);
+		
+	}
+	
 	public Integer getId() {
 		return get(ID_KEY);
 	}
@@ -30,5 +33,6 @@ public class StatusDatas extends BaseModelData implements Serializable {
 	public void setValue(String value) {
 		set(ID_VALUE,value);
 	}
-
+	
+	
 }

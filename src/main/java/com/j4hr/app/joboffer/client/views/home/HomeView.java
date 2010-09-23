@@ -16,7 +16,7 @@ public class HomeView extends AbstractView {
 	public Widget getContent() {
 
 
-		HomeViewContainer container = new HomeViewContainer();
+		HomeViewContainer container = new HomeViewContainer(gui);
 		
 		//construction et initilisation des boutons
 		//Création du bouton : lib+ listener

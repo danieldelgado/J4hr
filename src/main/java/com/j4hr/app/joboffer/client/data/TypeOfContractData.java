@@ -22,8 +22,8 @@ public class TypeOfContractData extends BaseModelData implements Serializable{
 	 */
 	
 	
-	public static final String TYPE_OF_CONTRACT_ID_KEY = "ID_TYPE_OF_CONTRACT";
-	public static final String TYPE_OF_CONTRACT_ID_VALUE = "VALUE_TYPE_OF_CONTRACT";
+	public static final String ID_KEY = "ID_TYPE_OF_CONTRACT";
+	public static final String ID_VALUE = "VALUE_TYPE_OF_CONTRACT";
 
 	public TypeOfContractData(){
 		
@@ -36,19 +36,19 @@ public class TypeOfContractData extends BaseModelData implements Serializable{
 	}
 
 	public Integer getId() {
-		return get(TYPE_OF_CONTRACT_ID_KEY);
+		return get(ID_KEY);
 	}
 
 	public void setId(Integer id) {
-		set(TYPE_OF_CONTRACT_ID_KEY,id);
+		set(ID_KEY,id);
 	}
 
 	public String getValue() {
-		return get(TYPE_OF_CONTRACT_ID_VALUE);
+		return get(ID_VALUE);
 	}
 
 	public void setValue(String value) {
-		set(TYPE_OF_CONTRACT_ID_VALUE,value);
+		set(ID_VALUE,value);
 	}
 
 }

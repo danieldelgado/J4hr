@@ -1,18 +1,8 @@
 package com.j4hr.app.joboffer.client.ext;
 
-import java.util.List;
-
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.data.BaseListLoader;
-import com.extjs.gxt.ui.client.data.BeanModel;
-import com.extjs.gxt.ui.client.data.BeanModelReader;
-import com.extjs.gxt.ui.client.data.RpcProxy;
-
-import com.extjs.gxt.ui.client.data.ListLoader;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.Window;
@@ -24,28 +14,31 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.j4hr.app.joboffer.client.Application;
+import com.j4hr.app.joboffer.client.data.ActivitySectorData;
+import com.j4hr.app.joboffer.client.data.JobTypeData;
+import com.j4hr.app.joboffer.client.data.ListRefencereUIDataManager;
 import com.j4hr.app.joboffer.client.data.TypeOfContractData;
 import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
-import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCService;
+import com.j4hr.app.joboffer.shared.dto.UserDTO;
 import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCServiceAsync;
-import com.j4hr.app.joboffer.shared.rpc.ListReferenceUIActionRPCServiceAsync;
 
 public class CreateJobOfferForm extends FormPanel {
-	
-	
+
+
 	private final JobOfferUIActionRPCServiceAsync jobOfferRPCService = JobOfferUIActionRPCServiceAsync.Util.getInstance();
-	private final ListReferenceUIActionRPCServiceAsync listReferenceUIActionRPC = ListReferenceUIActionRPCServiceAsync.Util.getInstance();
-	public CreateJobOfferForm(final Window parent) {
-		
+
+	public CreateJobOfferForm(final Window parent,final Application gui) {
+
 		FormData formData = new FormData("70%");  
-	
-		
+
+
 		setHeaderVisible(false);  
 		setFrame(true);  
-		
+
 		setAutoWidth(true);
 		setAutoHeight(true);
-		
+
 
 		final TextField<String> positionTitle = new TextField<String>();  
 		positionTitle.setFieldLabel("Position title");  
@@ -53,126 +46,103 @@ public class CreateJobOfferForm extends FormPanel {
 		positionTitle.setData("aria-previous", getButtonBar().getId());  
 		add(positionTitle, formData);  
 
-		TextArea jobOfferDescription = new TextArea();  
+		final TextArea jobOfferDescription = new TextArea();  
 		jobOfferDescription.setPreventScrollbars(true);  
 		jobOfferDescription.setFieldLabel("jobOffer Description");  
 		add(jobOfferDescription, formData);  
 
-		final TextField<Integer> numberOfPosition = new TextField<Integer>();  
+		final TextField<String> numberOfPosition = new TextField<String>();  
 		numberOfPosition.setFieldLabel("Number of position");  
 		numberOfPosition.setAllowBlank(false);  
 		add(numberOfPosition, formData);  
-		
-		final TextField<Integer> jobofferRef = new TextField<Integer>();  
+
+		final TextField<String> jobofferRef = new TextField<String>();  
 		jobofferRef.setFieldLabel("Reference job offer");  
 		jobofferRef.setAllowBlank(false);  
 		jobofferRef.setData("aria-previous", getButtonBar().getId());  
 		add(jobofferRef, formData);  
-		
+
 
 		final SimpleComboBox<String> statusList = new SimpleComboBox<String>();
 		statusList.setFieldLabel("JobOffer Status");
 		statusList.add("Draft");
-		statusList.add("Unpublished");
-		statusList.add("Publiched");
-		
+		statusList.add("UnPublished");
+		statusList.add("Published");
+
 		add(statusList,formData);
-		
-		final ListStore<TypeOfContractData> listTypeOfContractDatas = new ListStore<TypeOfContractData>();
-		
+
+
+
 		final ComboBox<TypeOfContractData> typeOfcontractList = new ComboBox<TypeOfContractData>();
 		typeOfcontractList.setFieldLabel("Type of contract");
-		
-		typeOfcontractList.setDisplayField(TypeOfContractData.TYPE_OF_CONTRACT_ID_VALUE);
-		typeOfcontractList.setValueField(TypeOfContractData.TYPE_OF_CONTRACT_ID_KEY);
-		
-		listReferenceUIActionRPC.getListTypeOfContract(new AsyncCallback<List<TypeOfContractData>>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				
-				MessageBox mb = new MessageBox();
-				mb.setMessage("Erreur pendant l'invocation du service distant " + caught.toString());
-				mb.show();
-				
-			}
-
-			@Override
-			public void onSuccess(List<TypeOfContractData> l) {
-				Info.display("nb occ",""+l.size());
-				listTypeOfContractDatas.add(l);
-				
-			}
-		});
-		
-		typeOfcontractList.setStore(listTypeOfContractDatas);
-//		RpcProxy<List<TypeOfContractData>> proxyTypeOfContract = new RpcProxy<List<TypeOfContractData>>(){
-//		
-//			@Override
-//			protected void load(Object loadConfig,
-//					AsyncCallback<List<TypeOfContractData>> callback) {
-//				Info.display("TEST3","test3");
-//				
-//				listReferenceUIActionRPC.getListTypeOfContract(callback);
-//				Info.display("TEST4","test4");
-//				
-//				
-//			}
-//		};
-//		BeanModelReader reader2 = new BeanModelReader(); 
-//		Info.display("test1","test1");
-//		ListLoader loader2 = new BaseListLoader(proxyTypeOfContract, reader2);
-//		final ListStore<TypeOfContractData> store2 = new ListStore<TypeOfContractData>(loader2);	
-//		Info.display("test1","test1");
-//		typeOfcontractList.setStore(store2);
-		Info.display("stored","stored");
+		typeOfcontractList.setDisplayField(TypeOfContractData.ID_VALUE);
+		typeOfcontractList.setValueField(TypeOfContractData.ID_KEY);
+		typeOfcontractList.setStore(ListRefencereUIDataManager.getTypeOfContractStore());
 		add(typeOfcontractList,formData);
-		
-//		SimpleComboBox<String> typeOfcontractList = new SimpleComboBox<String>();
-//		typeOfcontractList.setFieldLabel("Type of contract");
-//		typeOfcontractList.add("CDI");
-//		typeOfcontractList.add("CDD");
-//		typeOfcontractList.add("Stage");
-//		add(typeOfcontractList,formData);
-		
-		SimpleComboBox<String> activitySectorlist = new SimpleComboBox<String>();
+
+
+		final ComboBox<ActivitySectorData> activitySectorlist = new ComboBox<ActivitySectorData>();
 		activitySectorlist.setFieldLabel("Activity sector");
-		activitySectorlist.add("Banque");
-		activitySectorlist.add("Assurance");
-		activitySectorlist.add("Industries");
-		activitySectorlist.add("Télécom");
+		activitySectorlist.setDisplayField(ActivitySectorData.ID_VALUE);
+		activitySectorlist.setValueField(ActivitySectorData.ID_KEY);
+		activitySectorlist.setStore(ListRefencereUIDataManager.getActivitySectorStore());
 		add(activitySectorlist,formData);
 
-		SimpleComboBox<String> jobTypeList = new SimpleComboBox<String>();
+		final ComboBox<JobTypeData> jobTypeList = new ComboBox<JobTypeData>();
 		jobTypeList.setFieldLabel("Job type");
-		jobTypeList.add("Administrateur");
-		jobTypeList.add("Moa");
-		jobTypeList.add("Chef de projet");
-		jobTypeList.add("Developpeur");
+		jobTypeList.setDisplayField(JobTypeData.ID_VALUE);
+		jobTypeList.setValueField(JobTypeData.ID_KEY);
+		jobTypeList.setStore(ListRefencereUIDataManager.getJobTypeStore());
 		add(jobTypeList,formData);
 
-		
 
-		
 		Button b = new Button("Create",new SelectionListener<ButtonEvent>(){
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				JobOfferDTO j = new JobOfferDTO();
-				j.setJobofferStatus(statusList.getSimpleValue());
-				//Info.display("TypeOfContract " , typeOfcontractList.getValue().getId().toString());
 				
-				
+				j.setJobofferStatus(statusList.getSimpleValue());				
+				j.setActivitySector(activitySectorlist.getValue().getId());		
+				j.setJobType(jobTypeList.getValue().getId());
+				j.setTypeOfContract(typeOfcontractList.getValue().getId());
+				j.setJobDescription(jobOfferDescription.getValue());
+				j.setPositionTile(positionTitle.getValue());
+				j.setNbPosition(new Integer(numberOfPosition.getValue()));
+				j.setJobRef(jobofferRef.getValue());
+				UserDTO currenUser = new UserDTO();
+				currenUser.setId(gui.getUsercontext().getId());
+				j.setUser(currenUser);
+			
+				jobOfferRPCService.createJobOfferUIAction(j, new AsyncCallback<Void>(){
+					@Override
+					public void onFailure(Throwable caught) {
+						MessageBox mb = new MessageBox();
+						mb.setMessage("Erreur pendant l'invocation du service distant : createJobOfferUIAction" );
+						mb.show();
+					}
+
+					public void onSuccess(Void result) {
+						Info.display("info", "Job Offer is created successfully");
+					}
+				});
+
 				parent.hide();
-				//Info.display("title", "Enregistrement effectué avec succés");
-				
+
 			}});  
 		addButton(b);  
-		addButton(new Button("Cancel"));  
+		addButton(new Button("Cancel",new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+
+				parent.hide();
+
+			}}));    
 
 		setButtonAlign(HorizontalAlignment.CENTER);// TODO Auto-generated constructor stub
 	}
 
-	}
+}
 
 

@@ -14,6 +14,8 @@ public class UserDTO implements Serializable {
 	
 	private String mail;
 	
+	private UserProfileEnum userProfile;
+	
 	
 
 	public String getLastname() {
@@ -54,6 +56,14 @@ public class UserDTO implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public UserProfileEnum getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfileEnum userProfile) {
+		this.userProfile = userProfile;
 	}
 	
 	

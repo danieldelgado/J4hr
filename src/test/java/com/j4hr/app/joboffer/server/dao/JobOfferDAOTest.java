@@ -65,11 +65,10 @@ public class JobOfferDAOTest {
 
 		TypeOfContract toc = typeOfContractDAO.findById(2);
 		ActivitySector activitySector = activitySectorDAO.findById(2);
-		System.out.println(activitySector.getId());
-		System.out.println(activitySector.getLblActivitySector());
+		
 		jo.setJobDescription(".net developpeur");
 		jo.setJobRef("DOTNETDEV");
-		//jo.setUser(creator);
+		
 		jo.setNbPosition(1);
 		jo.setTypeOfContract(toc);
 		
@@ -116,10 +115,11 @@ public void loadJobOfferByRHUserTest(){
 
 	TypeOfContract toc = typeOfContractDAO.findById(2);
 	ActivitySector activitySector = activitySectorDAO.findById(1);
-	System.out.println(activitySector.getId());
-	System.out.println(activitySector.getLblActivitySector());
+	
 	jo.setJobDescription(".net developpeur");
 	jo.setJobRef("DOTNETDEV");
+	
+	
 	
 	jo.setNbPosition(1);
 	jo.setTypeOfContract(toc);
@@ -181,8 +181,7 @@ public void loadDraftOfferByRHUserTest(){
 
 	TypeOfContract toc = typeOfContractDAO.findById(2);
 	ActivitySector activitySector = activitySectorDAO.findById(1);
-	System.out.println(activitySector.getId());
-	System.out.println(activitySector.getLblActivitySector());
+	
 	jo.setJobDescription(".net developpeur");
 	jo.setJobRef("DOTNETDEV");
 	

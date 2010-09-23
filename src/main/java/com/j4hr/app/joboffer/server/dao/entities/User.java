@@ -63,6 +63,12 @@ public class User {
 		this.mail = mail;
 	}
 	
+	public  boolean isAdminProfile(){
+		throw new UnsupportedOperationException("This method can not  be invoked directly on this class. You must use User's sub-classes");
+	}
 	
+	public  boolean isRHProfile(){
+		throw new UnsupportedOperationException("This method can not  be invoked directly on this class. You must use User's sub-classes");
+	}
 	
 }

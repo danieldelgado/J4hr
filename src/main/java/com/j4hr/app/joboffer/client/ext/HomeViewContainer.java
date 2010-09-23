@@ -14,7 +14,9 @@ import com.extjs.gxt.ui.client.widget.layout.HBoxLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.HBoxLayout.HBoxLayoutAlign;
 import com.google.gwt.user.client.Element;
+import com.j4hr.app.joboffer.client.Application;
 import com.j4hr.app.joboffer.client.views.home.actions.ButtonActionFactory;
+import com.j4hr.app.joboffer.shared.dto.UserProfileEnum;
 
 
 /**
@@ -26,15 +28,23 @@ import com.j4hr.app.joboffer.client.views.home.actions.ButtonActionFactory;
 public class HomeViewContainer extends LayoutContainer{
 	private ContentPanel lcwest;  
 	private ContentPanel lccenter;  
+	private Application gui;
+	
+	
+	public HomeViewContainer(Application gui){
+		this.gui=gui;
+	}
 
 	@Override
 	protected void onRender(Element parent, int index) {
 		super.onRender(parent, index);
 
-		final Button createJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.CREATE_NEW_JOB_OFFER_ACTION);
-		final Button loadDraftJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.LOAD_ALL_JOB_OFFERS_ACTION);
+		final Button createJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.CREATE_NEW_JOB_OFFER_ACTION,gui);
+		final Button loadDraftJobOffer = ButtonActionFactory.buildButton(ButtonActionFactory.LOAD_ALL_JOB_OFFERS_ACTION,gui);
 				
-
+		if(!(gui.getUsercontext().getUserProfile().equals(UserProfileEnum.Rh))){
+			createJobOffer.disable();
+		}
 			
 		//creation du conteneur global, avec un layout de type Border
 		ContentPanel panel = new ContentPanel();  

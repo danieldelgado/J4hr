@@ -25,7 +25,7 @@ public class JobOfferUIActionRPCServiceImpl implements	JobOfferUIActionRPCServic
 	
 	public void createJobOfferUIAction(JobOfferDTO jobOffer){
 		
-		
+		j4hrService.createJobOffer(jobOffer);
 		
 		
 	}
