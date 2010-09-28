@@ -79,9 +79,8 @@ public class J4hrListReferenceServiceImpl implements J4hrListReferenceService {
 	private List<JobTypeDTO> convertJobTypeToDTOList(List<JobType> l ){
 		List<JobTypeDTO> finalList = new ArrayList<JobTypeDTO>();
 		for(JobType as : l){
-			JobTypeDTO asDTO = new JobTypeDTO();
-			asDTO.setId(as.getId());
-			asDTO.setLblJobType(as.getLblJobType());
+			JobTypeDTO asDTO = new JobTypeDTO(as.getId(),as.getLblJobType());
+		
 			finalList.add(asDTO);
 		}
 		

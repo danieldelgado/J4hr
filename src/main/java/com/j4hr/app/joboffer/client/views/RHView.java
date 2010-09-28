@@ -1,13 +1,13 @@
-package com.j4hr.app.joboffer.client.views.home;
+package com.j4hr.app.joboffer.client.views;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.j4hr.app.joboffer.client.Application;
-import com.j4hr.app.joboffer.client.ext.HomeViewContainer;
+import com.j4hr.app.joboffer.client.ext.RHViewContainer;
 import com.j4hr.app.joboffer.client.views.AbstractView;
 
-public class HomeView extends AbstractView {
+public class RHView extends AbstractView {
 
-	public HomeView(Application gui) {
+	public RHView(Application gui) {
 		super(gui);
 		
 	}
@@ -16,7 +16,7 @@ public class HomeView extends AbstractView {
 	public Widget getContent() {
 
 
-		HomeViewContainer container = new HomeViewContainer(gui);
+		RHViewContainer container = new RHViewContainer(gui);
 		
 		//construction et initilisation des boutons
 		//Création du bouton : lib+ listener

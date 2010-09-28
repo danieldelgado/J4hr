@@ -18,6 +18,7 @@ import com.j4hr.app.joboffer.server.dao.entities.JobOffer;
 import com.j4hr.app.joboffer.server.dao.entities.JobType;
 import com.j4hr.app.joboffer.server.dao.entities.PublishedOffer;
 import com.j4hr.app.joboffer.server.dao.entities.RH;
+import com.j4hr.app.joboffer.server.dao.entities.StatusEnum;
 import com.j4hr.app.joboffer.server.dao.entities.TypeOfContract;
 import com.j4hr.app.joboffer.server.dao.entities.UnPublishedOffer;
 import com.j4hr.app.joboffer.server.dao.entities.User;
@@ -65,7 +66,7 @@ public class JobOfferDAOTest {
 
 		TypeOfContract toc = typeOfContractDAO.findById(2);
 		ActivitySector activitySector = activitySectorDAO.findById(2);
-		
+		jo.setPositionTile("UnPublished offer 1");
 		jo.setJobDescription(".net developpeur");
 		jo.setJobRef("DOTNETDEV");
 		
@@ -115,7 +116,7 @@ public void loadJobOfferByRHUserTest(){
 
 	TypeOfContract toc = typeOfContractDAO.findById(2);
 	ActivitySector activitySector = activitySectorDAO.findById(1);
-	
+	jo.setPositionTile("Draft offer 2");
 	jo.setJobDescription(".net developpeur");
 	jo.setJobRef("DOTNETDEV");
 	
@@ -181,7 +182,7 @@ public void loadDraftOfferByRHUserTest(){
 
 	TypeOfContract toc = typeOfContractDAO.findById(2);
 	ActivitySector activitySector = activitySectorDAO.findById(1);
-	
+	jo2.setPositionTile("Draft offer 1");
 	jo.setJobDescription(".net developpeur");
 	jo.setJobRef("DOTNETDEV");
 	
@@ -200,7 +201,7 @@ public void loadDraftOfferByRHUserTest(){
 
 	toc = typeOfContractDAO.findById(2);
 	activitySector = activitySectorDAO.findById(1);
-	
+	jo2.setPositionTile("Published offer 1");
 	jo2.setJobDescription(".net developpeur");
 	jo2.setJobRef("DOTNETDEV");
 	
@@ -221,10 +222,25 @@ public void loadDraftOfferByRHUserTest(){
 	RH rh = (RH)userDAO.findById(creator.getId());
 	
 	Assert.assertEquals(2, rh.getJobOffers().size());
-	
-	
+	}
 
+
+@Test
+public void LoadDraftJobOfferTest(){
+	List<JobOffer> l = jobOfferDAO.loadDraftOffers();
+	Assert.assertNotNull(l);
+	Assert.assertEquals(StatusEnum.Draft, l.get(0).getStatusOffer());
 }
+
+@Test
+@Rollback(false)
+public void removeDraftJobOfferTest(){
+	List<JobOffer> l = jobOfferDAO.loadDraftOffers();
+	Assert.assertNotNull(l);
+	Assert.assertEquals(StatusEnum.Draft, l.get(0).getStatusOffer());
+}
+
+
 
 
 }

@@ -5,15 +5,21 @@ import java.util.Map;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
 
-public class StatusDatas extends BaseModelData implements Serializable {
-	
+public class StatusData extends BaseModelData implements Serializable {
+
 	public static final String ID_KEY = "ID_STATUS";
 	public static final String ID_VALUE = "VALUE_STATUS";
 
-	public StatusDatas(){
+	public StatusData(){
+
+	}
+
+
+	public StatusData(Integer id, String value){
+		setId(id);
+		setValue(value);
 		
 	}
-	
 
 	public Integer getId() {
 		return get(ID_KEY);

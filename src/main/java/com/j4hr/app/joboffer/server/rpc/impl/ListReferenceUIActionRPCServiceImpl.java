@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.j4hr.app.joboffer.client.data.ActivitySectorData;
 import com.j4hr.app.joboffer.client.data.JobTypeData;
+import com.j4hr.app.joboffer.client.data.StatusData;
 import com.j4hr.app.joboffer.client.data.TypeOfContractData;
 import com.j4hr.app.joboffer.server.service.J4hrListReferenceService;
 import com.j4hr.app.joboffer.server.service.TypeListEnum;
@@ -54,6 +55,7 @@ public class ListReferenceUIActionRPCServiceImpl implements
 		return retList;
 	
 	}
+	
 	
 	
 	@Override

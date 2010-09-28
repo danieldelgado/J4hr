@@ -7,6 +7,16 @@ public class TypeOfContractDTO implements Serializable {
 	private Integer id;
 	private String lblTypeOfContract;
 	
+	public TypeOfContractDTO(){
+		
+	}
+	
+	public TypeOfContractDTO(Integer id, String lbl){
+		this.id=id;
+		this.lblTypeOfContract=lbl;
+	}
+	
+	
 	public Integer getId() {
 		return id;
 	}

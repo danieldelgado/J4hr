@@ -76,5 +76,21 @@ public class ListRefencereUIDataManager {
 
 		return listActivitySector;
 	}
+	
+	/**
+	 * Chargement des données pour de type of contract
+	 * @return ListStore<TypeOfContractData>
+	 */
+	public static ListStore<StatusData> getStatusStore(){
+		ListStore<StatusData> listStatusDatas = new ListStore<StatusData>();
+		
+		listStatusDatas.add(new StatusData(1,"Draft"));
+		listStatusDatas.add(new StatusData(2,"Published"));
+		listStatusDatas.add(new StatusData(3,"UnPublished"));
+		
+
+		return listStatusDatas;
+	}
+	
 
 }

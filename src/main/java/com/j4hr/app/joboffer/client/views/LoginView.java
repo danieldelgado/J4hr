@@ -18,7 +18,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.j4hr.app.joboffer.client.Application;
 import com.j4hr.app.joboffer.shared.dto.UserDTO;
-import com.j4hr.app.joboffer.shared.dto.UserProfileEnum;
 import com.j4hr.app.joboffer.shared.rpc.AuthentificationRPCServiceAsync;
 
 public class LoginView extends AbstractView {
@@ -46,8 +45,10 @@ public class LoginView extends AbstractView {
 		VBoxLayoutData layoutData = new VBoxLayoutData(new Margins(0, 0, 5, 0));
 		LabelField lblLogin = new LabelField("Login : ");
 		final TextField<String> login = new TextField<String>();
+		login.setValue("fsznajderman");
 		LabelField lblPassword = new LabelField("Password : ");
 		final TextField<String> password = new TextField<String>();
+		password.setValue("220276");
 		password.setPassword(true);
 		Button authenAction = new Button("Log in");
 		authenAction.addListener(Events.OnClick, new Listener<ButtonEvent>() {  
@@ -73,16 +74,15 @@ public class LoginView extends AbstractView {
 						String msg = "no message found";
 						
 						if(user != null){
-							msg = "Hello !";
+							msg = "Hello " + user.getFirstname() + " "+ user.getLastname();
 							
-							Info.display("Id User",""+user.getId());
-							Info.display("User name",""+user.getFirstname());
+							
 							gui.getUsercontext().setName(user.getFirstname());
 							gui.getUsercontext().setId(user.getId());
 							gui.getUsercontext().setUserProfile(user.getUserProfile());
-							gui.display("home");
+							gui.display("RH");
 						}else{
-							msg = "utilisateur inconnu!";
+							msg = "Unknow user!";
 						}
 						mb.setMessage(msg);
 						mb.show();

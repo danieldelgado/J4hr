@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.j4hr.app.joboffer.server.dao.entities.Admin;
 import com.j4hr.app.joboffer.server.dao.entities.User;
 import com.j4hr.app.joboffer.server.dao.user.UserDAO;
 
@@ -61,18 +62,18 @@ public class UserDaoTest {
 	
 	@Test
 	@Rollback(false)
-	public void checkAuthenText() {
+	public void checkAuthenTest() {
 
-		User u = new User();
+		Admin u = new Admin();
 		u.setFirstname("Fabrice");
 		u.setLastname("Sznajderman");
-		u.setLogin("fabszn");
-		u.setPassword("220276");
+		u.setLogin("admin");
+		u.setPassword("admin");
 		u.setMail("fabszn@gmail.com");
 
 		userDAO.persist(u);
 		try {
-			User ufound = userDAO.findUserByLogin("fabszn", "220276");
+			User ufound = userDAO.findUserByLogin("admin", "admin");
 
 			Assert.assertEquals("Sznajderman", ufound.getLastname());
 			Assert.assertNotNull(ufound);

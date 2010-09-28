@@ -1,5 +1,8 @@
 package com.j4hr.app.joboffer.client.ext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -9,7 +12,6 @@ import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
@@ -18,7 +20,9 @@ import com.j4hr.app.joboffer.client.Application;
 import com.j4hr.app.joboffer.client.data.ActivitySectorData;
 import com.j4hr.app.joboffer.client.data.JobTypeData;
 import com.j4hr.app.joboffer.client.data.ListRefencereUIDataManager;
+import com.j4hr.app.joboffer.client.data.StatusData;
 import com.j4hr.app.joboffer.client.data.TypeOfContractData;
+import com.j4hr.app.joboffer.client.ext.grid.AbstractJobOfferGridView;
 import com.j4hr.app.joboffer.shared.dto.ActivitySectorDTO;
 import com.j4hr.app.joboffer.shared.dto.JobOfferDTO;
 import com.j4hr.app.joboffer.shared.dto.JobTypeDTO;
@@ -26,13 +30,16 @@ import com.j4hr.app.joboffer.shared.dto.TypeOfContractDTO;
 import com.j4hr.app.joboffer.shared.dto.UserDTO;
 import com.j4hr.app.joboffer.shared.rpc.JobOfferUIActionRPCServiceAsync;
 
-public class CreateJobOfferForm extends FormPanel {
+public class EditJobOfferForm extends FormPanel {
 
 
 	private final JobOfferUIActionRPCServiceAsync jobOfferRPCService = JobOfferUIActionRPCServiceAsync.Util.getInstance();
+	
 
-	public CreateJobOfferForm(final Window parent,final Application gui) {
+	public EditJobOfferForm(final Window parent,Integer idJobOffer, final Application gui) {
 
+		
+		
 		FormData formData = new FormData("70%");  
 
 
@@ -42,7 +49,10 @@ public class CreateJobOfferForm extends FormPanel {
 		setAutoWidth(true);
 		setAutoHeight(true);
 
-
+		final TextField<String> idOfferField = new TextField<String>(); 
+		idOfferField.setValue(""+idJobOffer);
+		idOfferField.setVisible(false);
+		
 		final TextField<String> positionTitle = new TextField<String>();  
 		positionTitle.setFieldLabel("Position title");  
 		positionTitle.setAllowBlank(false);  
@@ -66,12 +76,12 @@ public class CreateJobOfferForm extends FormPanel {
 		add(jobofferRef, formData);  
 
 
-		final SimpleComboBox<String> statusList = new SimpleComboBox<String>();
+		final ComboBox<StatusData> statusList = new ComboBox<StatusData>();
 		statusList.setFieldLabel("JobOffer Status");
-		statusList.add("Draft");
-		statusList.add("UnPublished");
-		statusList.add("Published");
-
+		statusList.setDisplayField(StatusData.ID_VALUE);
+		statusList.setValueField(StatusData.ID_KEY);	
+		
+		statusList.setStore(ListRefencereUIDataManager.getStatusStore());
 		add(statusList,formData);
 
 
@@ -99,13 +109,14 @@ public class CreateJobOfferForm extends FormPanel {
 		add(jobTypeList,formData);
 
 
-		Button b = new Button("Create",new SelectionListener<ButtonEvent>(){
+		Button b = new Button("Update",new SelectionListener<ButtonEvent>(){
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				JobOfferDTO j = new JobOfferDTO();
 				
-				j.setJobofferStatus(statusList.getSimpleValue());				
+				j.setId(new Integer(idOfferField.getValue()));
+				j.setJobofferStatus(statusList.getValue().getValue());				
 				j.setActivitySector(new ActivitySectorDTO(activitySectorlist.getValue().getId(),activitySectorlist.getValueField()));		
 				j.setJobType(new JobTypeDTO(jobTypeList.getValue().getId(),jobTypeList.getValueField()));
 				j.setTypeOfContract(new TypeOfContractDTO(typeOfcontractList.getValue().getId(),typeOfcontractList.getValueField()));
@@ -117,16 +128,16 @@ public class CreateJobOfferForm extends FormPanel {
 				currenUser.setId(gui.getUsercontext().getId());
 				j.setUser(currenUser);
 			
-				jobOfferRPCService.createJobOfferUIAction(j, new AsyncCallback<Void>(){
+				jobOfferRPCService.updateJobOfferUIAction(j, new AsyncCallback<Void>(){
 					@Override
 					public void onFailure(Throwable caught) {
 						MessageBox mb = new MessageBox();
-						mb.setMessage("Erreur pendant l'invocation du service distant : createJobOfferUIAction" );
+						mb.setMessage("Erreur pendant l'invocation du service distant : updateJobOfferUIAction" );
 						mb.show();
 					}
 
 					public void onSuccess(Void result) {
-						Info.display("info", "Job Offer is created successfully");
+						Info.display("info", "Job Offer is updated successfully");
 					}
 				});
 
@@ -134,6 +145,29 @@ public class CreateJobOfferForm extends FormPanel {
 
 			}});  
 		addButton(b);  
+		Button d = new Button("Delete",new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				
+			
+				jobOfferRPCService.removeJobOfferUIAction(new Integer(idOfferField.getValue()), new AsyncCallback<Void>(){
+					@Override
+					public void onFailure(Throwable caught) {
+						MessageBox mb = new MessageBox();
+						mb.setMessage("Erreur pendant l'invocation du service distant : updateJobOfferUIAction" );
+						mb.show();
+					}
+
+					public void onSuccess(Void result) {
+						Info.display("info", "Job Offer is deleted successfully");
+					}
+				});
+
+				parent.hide();
+
+			}});  
+		addButton(d);  
 		addButton(new Button("Cancel",new SelectionListener<ButtonEvent>(){
 
 			@Override
@@ -144,8 +178,54 @@ public class CreateJobOfferForm extends FormPanel {
 			}}));    
 
 		setButtonAlign(HorizontalAlignment.CENTER);// TODO Auto-generated constructor stub
+		
+		jobOfferRPCService.loadJobOfferUIAction(idJobOffer, new AsyncCallback<JobOfferDTO>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				MessageBox mb = new MessageBox();
+				mb.setMessage("Erreur pendant l'invocation du service distant : loadJobOfferUIAction" );
+				mb.show();
+				
+			}
+
+			@Override
+			public void onSuccess(JobOfferDTO result) {
+				positionTitle.setValue(result.getPositionTile());
+				jobOfferDescription.setValue(result.getJobDescription());
+				numberOfPosition.setValue(""+result.getNbPosition());
+				jobofferRef.setValue(result.getJobRef());
+				
+		
+				List<StatusData> lStatusData = new ArrayList<StatusData>();
+				lStatusData.add(getStatusDataByLib(result.getJobofferStatus()));
+				statusList.setSelection(lStatusData);
+				
+				List<TypeOfContractData> lTypeOfContract = new ArrayList<TypeOfContractData>();
+				lTypeOfContract.add(new TypeOfContractData(result.getTypeOfContract().getId(),result.getTypeOfContract().getLblTypeOfContract()));
+				typeOfcontractList.setSelection(lTypeOfContract);
+				
+				List<ActivitySectorData> lActivitySector = new ArrayList<ActivitySectorData>();
+				lActivitySector.add(new ActivitySectorData(result.getActivitySector().getId(),result.getActivitySector().getLblActivitySector()));
+				activitySectorlist.setSelection(lActivitySector);
+			
+				List<JobTypeData> lJobTypeData = new ArrayList<JobTypeData>();
+				lJobTypeData.add(new JobTypeData(result.getJobType().getId(),result.getJobType().getLblJobType()));
+				jobTypeList.setSelection(lJobTypeData);
+			}});
+		
 	}
-
+	
+	
+	
+	private StatusData getStatusDataByLib(String lbl){
+		
+		if(lbl.equalsIgnoreCase("Draft")){
+			return new StatusData(1,"Draft");
+		}else if(lbl.equalsIgnoreCase("Published")){
+			return new StatusData(2,"Published");
+		}else{
+			return new StatusData(3,"UnPublished");
+		}
+	}
 }
-
-

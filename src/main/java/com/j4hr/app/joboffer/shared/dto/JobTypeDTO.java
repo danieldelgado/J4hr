@@ -3,7 +3,7 @@ package com.j4hr.app.joboffer.shared.dto;
 import java.io.Serializable;
 
 /**
- * Classe de représention d'une offre de poste
+ * Classe de represention d'une offre de poste
  * @author fabricesznajderman
  *
  */
@@ -12,6 +12,15 @@ public class JobTypeDTO implements Serializable {
 
 	private int id;
 	
+	public JobTypeDTO(int id, String lblJobType) {
+		
+		this.id = id;
+		this.lblJobType = lblJobType;
+	}
+	public JobTypeDTO(){
+		
+	}
+
 	private String lblJobType;
 
 	public int getId() {

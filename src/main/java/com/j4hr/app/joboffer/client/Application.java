@@ -8,11 +8,11 @@ import com.extjs.gxt.ui.client.widget.Viewport;
 import com.extjs.gxt.ui.client.widget.layout.CenterLayout;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.j4hr.app.joboffer.client.ext.CreateJobOfferForm;
 import com.j4hr.app.joboffer.client.session.Session;
 import com.j4hr.app.joboffer.client.views.AbstractView;
+import com.j4hr.app.joboffer.client.views.AdminView;
 import com.j4hr.app.joboffer.client.views.LoginView;
-import com.j4hr.app.joboffer.client.views.home.HomeView;
+import com.j4hr.app.joboffer.client.views.RHView;
 
 
 
@@ -36,7 +36,8 @@ implements EntryPoint
 		
 
 		views.put("login", new LoginView(this));
-		views.put("home", new HomeView(this));
+		views.put("RH", new RHView(this));
+		views.put("ADMIN", new AdminView(this));
 
 		display("login");
 	}
@@ -46,7 +47,7 @@ implements EntryPoint
 		AbstractView view = views.get(viewName);
 		RootLayoutPanel.get().clear();
 		ContentPanel cp = new ContentPanel();
-		cp.setHeading("JobOffer Web Application");
+		cp.setHeading("J4HR Web Application - Recruitment");
 		cp.setLayout(new CenterLayout());
 		cp.setSize(800, 600);
 		cp.add(view.getContent());

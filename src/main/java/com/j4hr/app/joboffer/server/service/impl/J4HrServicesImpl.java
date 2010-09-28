@@ -3,7 +3,7 @@ package com.j4hr.app.joboffer.server.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.activation.UnsupportedDataTypeException;
+import javax.lang.model.element.Modifier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,25 +43,25 @@ import com.j4hr.app.joboffer.shared.dto.UserProfileEnum;
 @Service("J4HrServices")
 public class J4HrServicesImpl implements J4HrServices{
 
-	
+
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	@Autowired
 	private JobOfferDAO jobOfferDAO;
-	
+
 	@Autowired
 	private TypeOfContractDAO typeOfContractDAO;
-	
+
 	@Autowired
 	private JobTypeDAO jobTypeDAO;
-	
+
 	@Autowired
 	private ActivitySectorDAO activitySectorDAO;
-	
-	
-	
-	
+
+
+
+
 	@Override
 	public UserDTO checIfkUserExist(String login, String pass) {
 		UserDTO userDTO = null;
@@ -73,9 +73,9 @@ public class J4HrServicesImpl implements J4HrServices{
 			userDTO.setMail(user.getMail());
 			userDTO.setId(user.getId());
 			userDTO.setUserProfile(compileUserProfile(user));
-			
-			
-	
+
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			//if exception is thrown, it's that no user exist for login/mdp 
@@ -89,94 +89,126 @@ public class J4HrServicesImpl implements J4HrServices{
 	 */
 	@Override
 	public List<JobOfferDTO> loadAllDraftJobOffer() {
-		
-		List<JobOffer> jobOffers = jobOfferDAO.findAll();
-		//TODO utilisation d'un transformer/!\
-		
-		
-		List<JobOfferDTO> jobOfferDTOs = new ArrayList<JobOfferDTO>();
-		
-		for(JobOffer j:jobOffers){
-			JobOfferDTO joDTO = new JobOfferDTO();
-			joDTO.setId(j.getId());
-			final ActivitySectorDTO activitySectorDTO = new ActivitySectorDTO();
-			activitySectorDTO.setId(j.getActivitySector().getId());
-			activitySectorDTO.setLblActivitySector(j.getActivitySector().getLblActivitySector());
-			joDTO.setActivitySector(activitySectorDTO.getId());
-			
-			joDTO.setJobRef(j.getJobRef());
-			
-			joDTO.setNbPosition(j.getNbPosition());
-			joDTO.setPositionTile(j.getPositionTile());
-			joDTO.setTags(j.getTags());
-			
-			final TypeOfContractDTO typeOfContractDTO = new TypeOfContractDTO();
-			typeOfContractDTO.setId(j.getTypeOfContract().getId());
-			typeOfContractDTO.setLblTypeOfContract(j.getTypeOfContract().getLblTypeOfContract());
-			joDTO.setTypeOfContract(typeOfContractDTO.getId());
-			
-			final UserDTO userDTO = new UserDTO();
-			joDTO.setUser(userDTO);
-			
-			final JobTypeDTO  jobTypeDTO = new JobTypeDTO();
-			jobTypeDTO.setId(j.getJobType().getId());
-			jobTypeDTO.setLblJobType(j.getJobType().getLblJobType());
-			
-			
-			
-			
-			jobOfferDTOs.add(joDTO);
-			
-		}
-		
-		
-		return jobOfferDTOs;
+
+		List<JobOffer> jobOfferDrafts = jobOfferDAO.loadDraftOffers();
+		System.out.println(jobOfferDrafts.size());	
+		return 	convertListJobOfferToJobOfferDTO(jobOfferDrafts);
+	}
+
+	/**
+	 * Load all joboffer that have the draft status
+	 */
+	@Override
+	public List<JobOfferDTO> loadAllPublishedJobOffer() {
+
+		List<JobOffer> jobOfferPublished = jobOfferDAO.loadPublishedOffers();
+		return convertListJobOfferToJobOfferDTO(jobOfferPublished);
 	}
 
 
-	
+	@Override
+	public List<JobOfferDTO> loadAllUnPublishedJobOffer() {
+		List<JobOffer> jobOfferUnPublished = jobOfferDAO.loadUnPublishedOffers();
+		return convertListJobOfferToJobOfferDTO(jobOfferUnPublished);
+
+	}
+
+
 	/**
 	 * Creation d'une offer de poste
 	 */
 	@Override
 	@Transactional
 	public void createJobOffer(JobOfferDTO jobOfferDTO) {
-		
-		String lblStatus = jobOfferDTO.getJobofferStatus();
-		StatusEnum currentStatus = StatusEnum.valueOf(lblStatus);
-		
-		JobOffer offer = getJobOfferInstance(currentStatus);
-		
-		
-		TypeOfContract toc = typeOfContractDAO.findById(jobOfferDTO.getTypeOfContract());
-		offer.setTypeOfContract(toc);
-		
-		JobType jt = jobTypeDAO.findById(jobOfferDTO.getJobType());
-		offer.setJobType(jt);
-		
-		ActivitySector as = activitySectorDAO.findById(jobOfferDTO.getActivitySector());
-		offer.setActivitySector(as);
-		
-		final RH u = (RH)userDAO.findById(jobOfferDTO.getUser().getId());
-		u.getJobOffers().add(offer);
-		
-		
-		offer.setJobDescription(jobOfferDTO.getJobDescription());
-		offer.setJobRef(jobOfferDTO.getJobRef());
-		offer.setNbPosition(jobOfferDTO.getNbPosition());
-		offer.setPositionTile(jobOfferDTO.getPositionTile());
-		
-		
-		jobOfferDAO.persist(offer);
-		//JobOffer jobOffer = 
-		
+		jobOfferDAO.persist(convertJobOfferDtoToJobOffer(jobOfferDTO,true));
 	}
 
+	@Override
+	@Transactional
+	public void updateJobOffer(JobOfferDTO jobOfferDTO) {
+		try {	
+
+			JobOffer existing = jobOfferDAO.findById(jobOfferDTO.getId());
+			JobOffer modified = convertJobOfferDtoToJobOffer(jobOfferDTO,false);
+
+			if(!(existing.getStatusOffer().equals(modified.getStatusOffer()))){
+				
+				JobOffer newJb = getJobOfferInstance(modified.getStatusOffer());
+				newJb.setActivitySector(modified.getActivitySector());
+				newJb.setJobDescription(modified.getJobDescription());
+				newJb.setJobRef(modified.getJobRef());
+				newJb.setJobType(modified.getJobType());
+				newJb.setNbPosition(modified.getNbPosition());
+				newJb.setPositionTile(modified.getPositionTile());
+				newJb.setTags(modified.getTags());
+				newJb.setTypeOfContract(modified.getTypeOfContract());
+				
+				//jobOfferDAO.remove(existing);
+				jobOfferDAO.persist(newJb);
+			}else{
+				modified.setId(jobOfferDTO.getId());
+				jobOfferDAO.merge(modified);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+	}
+
+
+	@Override
+	@Transactional
+	public void removeJobOffer(Integer i){
+		JobOffer jToDelete = jobOfferDAO.findById(i);
+		
+		jobOfferDAO.remove(jToDelete);
+	}
 	
+	@Override
+	public JobOfferDTO loadJobOffer(Integer jobOfferId) {
+		return convertJobOfferToJobOfferDTO(jobOfferDAO.findById(jobOfferId));
+	}
+
+
+	private JobOfferDTO convertJobOfferToJobOfferDTO(JobOffer j){
+		if(j==null){return null;}
+		JobOfferDTO joDTO = new JobOfferDTO();
+		joDTO.setId(j.getId());
+
+		joDTO.setJobofferStatus(j.getStatusOffer().name());
+
+		final ActivitySectorDTO activitySectorDTO = new ActivitySectorDTO();
+		activitySectorDTO.setId(j.getActivitySector().getId());
+		activitySectorDTO.setLblActivitySector(j.getActivitySector().getLblActivitySector());
+		joDTO.setActivitySector(activitySectorDTO);
+
+		joDTO.setJobRef(j.getJobRef());
+
+		joDTO.setNbPosition(j.getNbPosition());
+		joDTO.setPositionTile(j.getPositionTile());
+		joDTO.setTags(j.getTags());
+		joDTO.setJobDescription(j.getJobDescription());
+
+		final TypeOfContractDTO typeOfContractDTO = new TypeOfContractDTO();
+		typeOfContractDTO.setId(j.getTypeOfContract().getId());
+		typeOfContractDTO.setLblTypeOfContract(j.getTypeOfContract().getLblTypeOfContract());
+		joDTO.setTypeOfContract(typeOfContractDTO);
+
+		final UserDTO userDTO = new UserDTO();
+		joDTO.setUser(userDTO);
+
+		final JobTypeDTO  jobTypeDTO = new JobTypeDTO(j.getJobType().getId(),j.getJobType().getLblJobType());
+		joDTO.setJobType(jobTypeDTO);
+
+
+		return joDTO;
+	}
+
 	private JobOffer getJobOfferInstance(StatusEnum se){
-		
+
 		JobOffer j;
-		
+
 		if(StatusEnum.UnPublished.equals(se)){
 			j = new UnPublishedOffer();
 		}else if(StatusEnum.Published.equals(se)){
@@ -184,14 +216,14 @@ public class J4HrServicesImpl implements J4HrServices{
 		}else {
 			j = new DraftOffer();
 		}
-		
+
 		return j;
-		
+
 	}
-	
-	
+
+
 	private UserProfileEnum compileUserProfile(User u){
-		
+
 		if(u.isAdminProfile()){
 			return UserProfileEnum.Admin;
 		}else if(u.isRHProfile()){
@@ -199,10 +231,56 @@ public class J4HrServicesImpl implements J4HrServices{
 		}else{
 			throw new RuntimeException("User Profile unknow");
 		}
-		
-		
-		
-		
 	}
-	
+
+
+	private List<JobOfferDTO> convertListJobOfferToJobOfferDTO(List<JobOffer> jobOffers){
+
+		List<JobOfferDTO> jobOfferDTOs = new ArrayList<JobOfferDTO>();
+
+		for(JobOffer j:jobOffers){	
+
+			jobOfferDTOs.add(convertJobOfferToJobOfferDTO(j));
+
+
+		}
+
+
+		return jobOfferDTOs;
+	}
+
+
+	private JobOffer convertJobOfferDtoToJobOffer(JobOfferDTO jobOfferDTO, boolean manageUserJoboffer){
+		String lblStatus = jobOfferDTO.getJobofferStatus();
+
+		StatusEnum currentStatus = StatusEnum.valueOf(lblStatus);
+
+		JobOffer offer = getJobOfferInstance(currentStatus);
+
+
+		TypeOfContract toc = typeOfContractDAO.findById(jobOfferDTO.getTypeOfContract().getId());
+		offer.setTypeOfContract(toc);
+
+		JobType jt = jobTypeDAO.findById(jobOfferDTO.getJobType().getId());
+		offer.setJobType(jt);
+
+		ActivitySector as = activitySectorDAO.findById(jobOfferDTO.getActivitySector().getId());
+		offer.setActivitySector(as);
+
+		if(manageUserJoboffer){
+			final RH u = (RH)userDAO.findById(jobOfferDTO.getUser().getId());
+			u.getJobOffers().add(offer);
+		}
+
+
+		offer.setJobDescription(jobOfferDTO.getJobDescription());
+		offer.setJobRef(jobOfferDTO.getJobRef());
+		offer.setNbPosition(jobOfferDTO.getNbPosition());
+		offer.setPositionTile(jobOfferDTO.getPositionTile());
+
+		return offer;
+	}
+
+
+
 }

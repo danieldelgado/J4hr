@@ -12,11 +12,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name="JOB_OFFER")
 public class JobOffer {
-	
+
 	protected JobOffer(){
-		
+
 	}
-	
+
+	public JobOffer(Integer id){
+		this.id=id;
+
+	}
+
 	@GeneratedValue(strategy=GenerationType.AUTO) @Id
 	private int id;
 	@Column(name="POSITION_TITLE")
@@ -28,25 +33,25 @@ public class JobOffer {
 	private int nbPosition;
 	@Column(name="JOB_REF",nullable=false)
 	private String jobRef;
-	
-	
-	
-	
+
+
+
+
 
 
 	@OneToOne
 	@JoinColumn(nullable=false)
 	private TypeOfContract typeOfContract;
-	
+
 	@OneToOne
 	@JoinColumn(nullable=false)
 	private ActivitySector activitySector;
-	
+
 	@OneToOne
 	@JoinColumn(nullable=false)
 	private JobType jobType;
-	
-	
+
+
 
 	public TypeOfContract getTypeOfContract() {
 		return typeOfContract;
@@ -90,7 +95,7 @@ public class JobOffer {
 	public void setJobRef(String jobRef) {
 		this.jobRef = jobRef;
 	}
-	
+
 	public ActivitySector getActivitySector() {
 		return activitySector;
 	}
@@ -103,16 +108,16 @@ public class JobOffer {
 	public void setJobType(JobType jobType) {
 		this.jobType = jobType;
 	}
-	
-	
+
+
 	public StatusEnum getStatusOffer() {
 		throw new UnsupportedOperationException("This method can not  be invoked directly on this class. You must use JobOffer's sub-classes");
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 
 }
